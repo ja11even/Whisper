@@ -63,13 +63,14 @@ const NavMenu = styled.ul`
   list-style: none;
   display: flex;
   gap: 0.8rem;
+  margin-top: 5px;
 `;
 const NavItem = styled.li``;
 const LogoDiv = styled.div`
-  color: ${({ scroll }) => (scroll ? "#283b89" : "#283b89")};
+  color: ${({ scroll }) => (scroll ? "white" : "#283b89")};
   font-size: 1.4rem;
 `;
 const NavLinkItem = styled(NavLink)`
-  color: ${({ scroll }) => (scroll ? "#283b89" : "#283b89")};
+  color: ${({ scroll }) => (scroll ? "white" : "#283b89")};
 `;
 export default Navbar;

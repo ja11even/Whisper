@@ -74,11 +74,11 @@ function Feed() {
                   <ReplyCountDiv>
                     <MessageCircle size={15} />1 reply
                   </ReplyCountDiv>
-                  <ViewRepliesDiv>
+                  {/*<ViewRepliesDiv>
                     <ReplyLink to={`/whisper/${whisper.id}`}>
                       View replies
                     </ReplyLink>
-                  </ViewRepliesDiv>
+                  </ViewRepliesDiv>*/}
                 </ThirdContainer>
               </WhisperCard>
             ))
@@ -104,6 +104,9 @@ const FeedWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
   margin-top: 100px;
+  @media (max-width: 700px) {
+    max-width: 370px;
+  }
 `;
 const WhisperCard = styled.div`
   width: 100%;
@@ -112,6 +115,8 @@ const WhisperCard = styled.div`
   padding: 2rem;
   border-radius: 10px;
   margin-bottom: 10px;
+  @media (max-width: 700px) {
+  }
 `;
 const FirstContainer = styled.div`
   display: flex;
@@ -164,6 +169,7 @@ const Whisper = styled.p`
 `;
 const WhisperButton = styled.button`
   border: none;
+  border: 1px solid #58d8db;
   background-color: #283b89;
   padding: 1rem;
   border-radius: 50%;
@@ -176,8 +182,8 @@ const WhisperButton = styled.button`
 `;
 const WhisperButtonDiv = styled.div`
   position: fixed;
-  bottom: 20px;
-  right: 75px;
+  bottom: 10px;
+  right: 10px;
   z-index: 1000;
 `;
 const PostWhisperContainer = styled(motion.div)`

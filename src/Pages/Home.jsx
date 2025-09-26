@@ -60,7 +60,7 @@ function Home() {
                   setOpen(false);
                   setOpenLogIn(true);
                 }}
-                style={{ color: "#58d8db", cursor: "pointer" }}
+                style={{ color: "#283b89", cursor: "pointer" }}
               >
                 {" "}
                 Log In
@@ -92,7 +92,7 @@ function Home() {
                   setOpenLogIn(false);
                   setOpen(true);
                 }}
-                style={{ color: "#58d8db", cursor: "pointer" }}
+                style={{ color: "#283b89", cursor: "pointer" }}
               >
                 Get Started
               </span>
@@ -135,14 +135,14 @@ const Buttons = styled.div`
   margin: 50px auto;
   @media (max-width: 700px) {
     width: 70%;
-    margin: 80px auto;
+    margin: 40px auto;
   }
 `;
 const AppName = styled.p`
   text-align: center;
   font-size: 2rem;
   color: white;
-  margin-top: 50px;
+  margin-top: -20px;
 `;
 const BodyHeader = styled.div`
   display: flex;
@@ -155,7 +155,8 @@ const BodyText = styled.p`
   font-size: 1.1rem;
   color: #11192d;
   @media (max-width: 700px) {
-    width: 330px;
+    width: 320px;
+    margin-top: 10px;
   }
 `;
 const PicturesDiv = styled.div`
@@ -163,12 +164,12 @@ const PicturesDiv = styled.div`
   display: flex;
   justify-content: center;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 10px;
 
   @media (max-width: 700px) {
     width: 300px;
     gap: 0.5rem;
-    margin-right: 80px;
+    margin-right: 70px;
   }
 `;
 const ImageOneDiv = styled(motion.div)`
@@ -223,7 +224,7 @@ const SignUpContainer = styled(motion.div)`
   padding: 2rem;
   margin-top: 50px;
   @media (max-width: 700px) {
-    width: 360px;
+    width: 350px;
     padding: 1.5rem;
   }
 `;
