@@ -1,17 +1,25 @@
 import styled from "styled-components";
 import ArchiveNavbar from "../Components/ArchiveNavbar";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, Heart, MessageCircle } from "lucide-react";
 import { useUser } from "../Hooks/useUser";
 import { useFetchWhisper } from "../Hooks/useWhispers";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import FullPageLoader from "../Components/FullPageLoader";
 
 function Archive() {
   const { user, isLoadingUser } = useUser();
+  const [likes, setLikes] = useState({});
   const fetchWhisper = useFetchWhisper();
-  if (isLoadingUser) return <p>loading..</p>;
-  if (fetchWhisper.isLoading) return <p>loading..</p>;
+
+  if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
+
   const whispers = fetchWhisper?.data;
 
+  const toggleLike = (id) => {
+    setLikes((prevLikes) => ({ ...prevLikes, [id]: !prevLikes[id] }));
+  };
   return (
     <>
       <ArchiveNavbar />
@@ -32,10 +40,24 @@ function Archive() {
                 <Whisper>{whisper.whisper}</Whisper>
               </SecondContainer>
               <ThirdContainer>
-                <ReplyCountDiv></ReplyCountDiv>
+                <ReplyCountDiv>
+                  <motion.div
+                    animate={
+                      likes[whisper.id] ? { scale: [1, 1.4, 1] } : { scale: 1 }
+                    }
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Heart
+                      size={20}
+                      onClick={() => toggleLike(whisper.id)}
+                      color={likes[whisper.id] ? "#58d8db" : "#99a1af"}
+                      fill={likes[whisper.id] ? "#58d8db" : "transparent"}
+                    />
+                  </motion.div>
+                </ReplyCountDiv>
                 <ViewRepliesDiv>
                   <ReplyLink to={`/whisper/${whisper.id}`}>
-                    View replies
+                    <ArrowRight color="#58d8db" size={20} />
                   </ReplyLink>
                 </ViewRepliesDiv>
               </ThirdContainer>
@@ -55,7 +77,10 @@ const ArchiveContainer = styled.div`
 const ArchiveWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 70px;
+  @media (max-width: 700px) {
+    max-width: 370px;
+  }
 `;
 const WhisperCard = styled.div`
   background-color: #283b89;
@@ -63,7 +88,7 @@ const WhisperCard = styled.div`
   border-radius: 10px;
   width: 100%;
   height: auto;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const FirstContainer = styled.div`
@@ -99,7 +124,7 @@ const UserImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9ae600;
+  color: #283b89;
 `;
 const UserDiv = styled.div`
   display: flex;
@@ -113,7 +138,13 @@ const ReplyLink = styled(Link)`
   text-decoration: none;
   color: #99a1af;
 `;
-const UserName = styled.p``;
-const Time = styled.div``;
-const Whisper = styled.p``;
+const UserName = styled.p`
+  color: white;
+`;
+const Time = styled.div`
+  color: #58d8db;
+`;
+const Whisper = styled.p`
+  color: white;
+`;
 export default Archive;

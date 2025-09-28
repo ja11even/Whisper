@@ -92,6 +92,7 @@ function App() {
             background: "white",
             color: "#283b89",
             textAlign: "center",
+            backdropFilter: "blur(6px)",
           },
         }}
       />

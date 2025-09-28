@@ -7,6 +7,7 @@ import { useAddWhisper, useFetchWhisper } from "../Hooks/useWhispers";
 import { Form, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import FullPageLoader from "../Components/FullPageLoader";
 
 function Feed() {
   const [open, setOpen] = useState(false);
@@ -16,18 +17,19 @@ function Feed() {
   const fetchWhisper = useFetchWhisper();
   const addWhisper = useAddWhisper();
 
-  if (isLoadingUser) return <p>loading..</p>;
-  if (fetchWhisper.isLoading) return <p>loading..</p>;
+  if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
+
   const whispers = fetchWhisper?.data;
   const userId = user?.id;
   const userName = user?.user_metadata?.userName;
-
+  const avatar = user?.user_metadata?.avatar_url;
+  console.log(user);
   const toggleLike = (id) => {
     setLikes((prevLikes) => ({ ...prevLikes, [id]: !prevLikes[id] }));
   };
   function onSubmit(data) {
     if (!data.whisper?.trim()) return;
-    const whisperData = { ...data, user_id: userId, username: userName };
+    const whisperData = { ...data, user_id: userId };
     addWhisper.mutate(whisperData, {
       onSuccess: () => {
         reset();
@@ -67,7 +69,11 @@ function Feed() {
                 <FirstContainer>
                   <UserDiv>
                     <UserImage>
-                      {whisper.username.charAt(0).toUpperCase()}
+                      {avatar ? (
+                        <AvatarImage src={avatar} />
+                      ) : (
+                        whisper.username.charAt(0).toUpperCase()
+                      )}
                     </UserImage>
                     <UserName>{whisper.username}</UserName>
                   </UserDiv>
@@ -135,8 +141,6 @@ const WhisperCard = styled.div`
   padding: 2rem;
   border-radius: 10px;
   margin-bottom: 5px;
-  @media (max-width: 700px) {
-  }
 `;
 const FirstContainer = styled.div`
   display: flex;
@@ -172,6 +176,12 @@ const UserImage = styled.div`
   align-items: center;
   justify-content: center;
   color: #283b89;
+`;
+const AvatarImage = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 const UserDiv = styled.div`
   display: flex;

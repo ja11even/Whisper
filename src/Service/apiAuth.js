@@ -7,6 +7,7 @@ export async function signUp({ email, password, userName }) {
     options: {
       data: {
         userName,
+        avatar_url: "",
       },
     },
   });

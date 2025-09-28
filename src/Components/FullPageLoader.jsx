@@ -28,13 +28,13 @@ const FullPage = styled.div`
   justify-content: center;
 `;
 const LoaderDiv = styled.div`
-  background-color: white;
+  background-color: #58d8db;
   width: 5px;
   height: 100px;
 `;
 const BlackDiv = styled(motion.div)`
   height: 50px;
   width: 100%;
-  background-color: #58d8db;
+  background-color: #283b89;
 `;
 export default FullPageLoader;

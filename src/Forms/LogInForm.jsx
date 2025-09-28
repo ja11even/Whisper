@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useLogIn } from "../Hooks/useLogIn";
+import SpinnerMini from "../Components/SpinnerMini";
 
 function LogInForm() {
   const [email, setEmail] = useState("");
@@ -32,7 +33,13 @@ function LogInForm() {
         />
       </PasswordDiv>
       <ButtonDiv>
-        <Button type="submit">Log In</Button>
+        <Button type="submit">
+          {logIn.isPending ? (
+            <SpinnerMini width="1.7rem" height="1.7rem" color="white" />
+          ) : (
+            "Log In"
+          )}
+        </Button>
       </ButtonDiv>
     </Form>
   );
@@ -71,7 +78,9 @@ const Button = styled.button`
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   font-family: inherit;
+  height: 52px;
   &:hover {
     cursor: pointer;
   }

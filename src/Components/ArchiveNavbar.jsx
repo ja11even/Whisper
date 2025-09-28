@@ -28,7 +28,7 @@ function ArchiveNavbar() {
         </NavDiv>
         <InputDiv scroll={scroll}>
           <SearchIcon size={14} />
-          <Input />
+          <Input scroll={scroll} />
         </InputDiv>
       </NavContainer>
     </Nav>
@@ -57,16 +57,17 @@ const NavDiv = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
-  color: ${({ scroll }) => (scroll ? "#283b89" : "#283b89")};
+  color: ${({ scroll }) => (scroll ? "white" : "#283b89")};
 `;
 const CircleDiv = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 1.1rem;
+  margin-left: -10px;
 `;
 const InputDiv = styled.div`
-  color: ${({ scroll }) => (scroll ? "#283b89" : "#283b89")};
+  color: ${({ scroll }) => (scroll ? "#58d8db" : "#283b89")};
   position: relative;
 `;
 const Input = styled.input`
@@ -78,7 +79,7 @@ const Input = styled.input`
   width: 180px;
   font-size: 1rem;
   font-family: inherit;
-  border: 1px solid #283b89;
+  caret-color: ${({ scroll }) => (scroll ? "#58d8db" : "#283b89")};
   &:focus {
     outline: none;
   }

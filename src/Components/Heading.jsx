@@ -37,5 +37,6 @@ export const Heading = styled.h1`
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      color: white;
     `}
 `;

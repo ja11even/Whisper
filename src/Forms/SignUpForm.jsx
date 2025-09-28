@@ -67,7 +67,13 @@ function SignUpForm() {
         {errors.password && <Error>Password is required</Error>}
       </PasswordDiv>
       <ButtonDiv>
-        <Button type="submit">Get Started</Button>
+        <Button type="submit">
+          {signUp.isPending ? (
+            <SpinnerMini width="1.7rem" height="1.7rem" color="white" />
+          ) : (
+            "Get Started"
+          )}
+        </Button>
       </ButtonDiv>
     </Form>
   );
@@ -113,6 +119,8 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   font-family: inherit;
+  align-items: center;
+  height: 52px;
   &:hover {
     cursor: pointer;
   }

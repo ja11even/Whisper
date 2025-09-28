@@ -1,15 +1,77 @@
 import styled from "styled-components";
 import SettingsNavbar from "../Components/SettingsNavbar";
 import { Heading } from "../Components/Heading";
-import { Upload, UsersRound } from "lucide-react";
+import { LogOut, Upload, UsersRound } from "lucide-react";
+import { useLogOut } from "../Hooks/useLogOut";
+import SpinnerMini from "../Components/SpinnerMini";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useUser } from "../Hooks/useUser";
+import { supabase } from "../Service/Supabase";
+import FullPageLoader from "../Components/FullPageLoader";
+import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 function Settings() {
+  const { user, isLoadingUser } = useUser();
+  const { mutate: logOut } = useLogOut();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [userName, setUserName] = useState(user?.user_metadata?.userName || "");
+  const queryClient = useQueryClient();
+  if (isLoadingUser) return <FullPageLoader />;
+  const userId = user?.id;
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setSelectedFile(file);
+    const preview = URL.createObjectURL(file);
+    setPreviewUrl(preview);
+  };
+  console.log(user);
+  async function onSubmit(e) {
+    e.preventDefault();
+    setUploading(true);
+    try {
+      let avatar_url = user?.user_metadata?.avatar_url;
+      if (selectedFile) {
+        const fileExt = selectedFile.name.split(".").pop();
+        const fileName = `${user.id}-${uuidv4()}.${fileExt}`;
+        const filePath = `avatars/${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from("avatars")
+          .upload(filePath, selectedFile);
+        if (uploadError) throw uploadError;
+
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from("avatars").getPublicUrl(filePath);
+
+        avatar_url = `${publicUrl}?${Date.now()}`;
+      }
+      const { error: uploadError } = await supabase.auth.updateUser({
+        data: {
+          userName,
+          avatar_url,
+        },
+      });
+      if (uploadError) throw uploadError;
+      toast.success("Profile updated");
+    } catch (err) {
+      console.log(err.message);
+      toast.error("Failed to update profile");
+    } finally {
+      setUploading(false);
+    }
+  }
   return (
     <>
       <SettingsNavbar />
       <SettingsContainer>
         <SettingsWrapper>
-          <UserCard>
+          <UserCard as="form" onSubmit={onSubmit}>
             <UserCardHeader>
               <Heading as="h4">
                 <UsersRound size={20} /> Profile
@@ -17,16 +79,47 @@ function Settings() {
               <UserCardText>Manage how you appear to your circle</UserCardText>
             </UserCardHeader>
             <DisplayName>
-              <Label>Username</Label>
-              <Input />
+              <Label>User Name</Label>
+              <Input
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
             </DisplayName>
             <ProfilePictureDiv>
-              <ProfileButton>
+              <HiddenInput
+                id="avatar"
+                onChange={handleFileChange}
+                type="file"
+                accept="image/*"
+              />
+              {previewUrl && <PreviewImg src={previewUrl} />}
+              <AvatarLabel htmlFor="avatar">
                 Upload profile <Upload size={20} />
-              </ProfileButton>
+              </AvatarLabel>
             </ProfilePictureDiv>
-            <Button>Save Profile Changes</Button>
+            <Button type="submit" disabled={uploading}>
+              {uploading ? (
+                <SpinnerMini width="1.6rem" height="1.6rem" color="white" />
+              ) : (
+                "Save Profile Changes"
+              )}
+            </Button>
           </UserCard>
+          <LogOutCard>
+            <UserCardHeader>
+              <Heading as="h4">
+                <LogOut size={20} /> Log Out
+              </Heading>
+              <UserCardText>Sign out of your whisper account</UserCardText>
+            </UserCardHeader>
+            <LogOutButton onClick={logOut}>
+              {logOut.isLoading ? (
+                <SpinnerMini width="1.5rem" height="1.5rem" color="#58d8db" />
+              ) : (
+                "LogOut"
+              )}
+            </LogOutButton>
+          </LogOutCard>
         </SettingsWrapper>
       </SettingsContainer>
     </>
@@ -36,24 +129,35 @@ function Settings() {
 const SettingsContainer = styled.div`
   min-height: 100vh;
   padding: 2rem 0;
+  background-color: #58d8db;
 `;
 const SettingsWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 70px;
+  @media (max-width: 700px) {
+    max-width: 370px;
+  }
 `;
 const UserCard = styled.div`
   padding: 2rem;
   padding-top: 1.5rem;
   border-radius: 10px;
-  background-color: #9ae600;
+  background-color: #283b89;
+  margin-bottom: 5px;
+`;
+const LogOutCard = styled.div`
+  padding: 2rem;
+  padding-top: 1.5rem;
+  border-radius: 10px;
+  background-color: #283b89;
 `;
 const UserCardHeader = styled.div`
   line-height: 1.4;
   margin-bottom: 20px;
 `;
 const UserCardText = styled.p`
-  color: black;
+  color: white;
   font-size: 1rem;
 `;
 const DisplayName = styled.div`
@@ -61,15 +165,18 @@ const DisplayName = styled.div`
   flex-direction: column;
   gap: 0.5rem;
 `;
-const Label = styled.label``;
+const Label = styled.label`
+  color: white;
+`;
 const Input = styled.input`
-  width: 30%;
+  width: auto;
   height: 30px;
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
   background-color: transparent;
   font-family: inherit;
   font-size: 1rem;
+  color: white;
   &:hover {
     cursor: pointer;
   }
@@ -79,7 +186,7 @@ const Input = styled.input`
 `;
 const Button = styled.button`
   border: none;
-  background-color: black;
+  background-color: #11192d;
   padding: 0.7rem;
   height: 45px;
   color: white;
@@ -88,9 +195,23 @@ const Button = styled.button`
   font-family: inherit;
   font-size: 0.9rem;
 `;
-const ProfileButton = styled.button`
-  background-color: white;
-  color: #9ae600;
+const LogOutButton = styled.button`
+  border: none;
+  border-radius: 5px;
+  padding: 0.7rem 1.5rem;
+  font-family: inherit;
+  background-color: #11192d;
+  color: white;
+  height: 45px;
+  font-size: 0.9rem;
+`;
+
+const HiddenInput = styled.input`
+  display: none;
+`;
+const AvatarLabel = styled.label`
+  background-color: #11192d;
+  color: white;
   border: none;
   padding: 0.7rem;
   border-radius: 5px;
@@ -100,6 +221,19 @@ const ProfileButton = styled.button`
   gap: 0.5rem;
   font-family: inherit;
   font-size: 0.9rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
-const ProfilePictureDiv = styled.div``;
+const PreviewImg = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+const ProfilePictureDiv = styled.div`
+  display: flex;
+  margin-top: 10px;
+  gap: 1rem;
+`;
 export default Settings;

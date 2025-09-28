@@ -76,7 +76,7 @@ function Home() {
             </FooterText>
           </SignUpContainer>
         ) : openLogIn ? (
-          <SignUpContainer
+          <LogInContainer
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
@@ -105,7 +105,7 @@ function Home() {
                 Get Started
               </span>
             </FooterText>
-          </SignUpContainer>
+          </LogInContainer>
         ) : (
           <Buttons>
             <GetStartedButton onClick={() => setOpen(true)}>
@@ -133,7 +133,7 @@ const HomeContainer = styled.div`
 const HomeWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 const Buttons = styled.div`
   display: flex;
@@ -177,7 +177,7 @@ const PicturesDiv = styled.div`
   @media (max-width: 700px) {
     width: 300px;
     gap: 0.5rem;
-    margin-right: 75px;
+    margin-right: 72px;
   }
 `;
 const ImageOneDiv = styled(motion.div)`
@@ -225,6 +225,20 @@ const ExistingAccountButton = styled.button`
 const SignUpContainer = styled(motion.div)`
   background-color: white;
   min-height: 400px;
+  max-height: 510px;
+  width: 650px;
+  margin: auto;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 50px;
+  @media (max-width: 700px) {
+    width: 350px;
+    padding: 1.5rem;
+  }
+`;
+const LogInContainer = styled(motion.div)`
+  background-color: white;
+  min-height: 380px;
   max-height: 510px;
   width: 650px;
   margin: auto;

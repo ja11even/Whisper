@@ -26,7 +26,7 @@ const Nav = styled.nav`
   position: fixed;
   width: 100%;
   padding: 1rem;
-  color: #9ae600;
+  color: #283b89;
 `;
 const NavContainer = styled.div`
   max-width: 1300px;
@@ -44,6 +44,7 @@ const SettingsDiv = styled.div`
   align-items: center;
   gap: 0.5rem;
   font-size: 1.1rem;
+  margin-left: -10px;
 `;
 const Arrow = styled(ArrowLeft)`
   &:hover {
