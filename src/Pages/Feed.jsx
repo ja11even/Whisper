@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Navbar from "../Components/Navbar";
-import { ArrowRight, MessageCircle, Plus } from "lucide-react";
+import { ArrowRight, Heart, MessageCircle, Plus } from "lucide-react";
 import { useUser } from "../Hooks/useUser";
 import { useState } from "react";
 import { useAddWhisper, useFetchWhisper } from "../Hooks/useWhispers";
@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 
 function Feed() {
   const [open, setOpen] = useState(false);
+  const [likes, setLikes] = useState({});
   const { user, isLoadingUser } = useUser();
   const { handleSubmit, reset, register } = useForm();
   const fetchWhisper = useFetchWhisper();
@@ -21,6 +22,9 @@ function Feed() {
   const userId = user?.id;
   const userName = user?.user_metadata?.userName;
 
+  const toggleLike = (id) => {
+    setLikes((prevLikes) => ({ ...prevLikes, [id]: !prevLikes[id] }));
+  };
   function onSubmit(data) {
     if (!data.whisper?.trim()) return;
     const whisperData = { ...data, user_id: userId, username: userName };
@@ -50,7 +54,9 @@ function Feed() {
                     <CancelButton type="button" onClick={() => setOpen(false)}>
                       Cancel
                     </CancelButton>
-                    <PostButton type="submit">Post</PostButton>
+                    <PostButton type="submit" disabled={addWhisper.isPending}>
+                      Post
+                    </PostButton>
                   </PostButtons>
                 </Buttons>
               </PostForm>
@@ -72,13 +78,27 @@ function Feed() {
                 </SecondContainer>
                 <ThirdContainer>
                   <ReplyCountDiv>
-                    <MessageCircle size={15} />1 reply
+                    <motion.div
+                      animate={
+                        likes[whisper.id]
+                          ? { scale: [1, 1.4, 1] }
+                          : { scale: 1 }
+                      }
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Heart
+                        size={20}
+                        onClick={() => toggleLike(whisper.id)}
+                        color={likes[whisper.id] ? "#58d8db" : "#99a1af"}
+                        fill={likes[whisper.id] ? "#58d8db" : "transparent"}
+                      />
+                    </motion.div>
                   </ReplyCountDiv>
-                  {/*<ViewRepliesDiv>
+                  <ViewRepliesDiv>
                     <ReplyLink to={`/whisper/${whisper.id}`}>
-                      View replies
+                      <ArrowRight color="#58d8db" size={20} />
                     </ReplyLink>
-                  </ViewRepliesDiv>*/}
+                  </ViewRepliesDiv>
                 </ThirdContainer>
               </WhisperCard>
             ))
@@ -103,7 +123,7 @@ const FeedContainer = styled.div`
 const FeedWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 70px;
   @media (max-width: 700px) {
     max-width: 370px;
   }
@@ -114,7 +134,7 @@ const WhisperCard = styled.div`
   height: auto;
   padding: 2rem;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   @media (max-width: 700px) {
   }
 `;
@@ -183,15 +203,22 @@ const WhisperButton = styled.button`
 const WhisperButtonDiv = styled.div`
   position: fixed;
   bottom: 10px;
-  right: 10px;
+  right: 71px;
   z-index: 1000;
+  @media (max-width: 700px) {
+    bottom: 20px;
+    right: 10px;
+  }
 `;
 const PostWhisperContainer = styled(motion.div)`
   background-color: #283b89;
-  height: 75vh;
+  height: 540px;
   padding: 1.5rem;
   margin-top: 50px;
   border-radius: 10px;
+  @media (max-width: 700px) {
+    height: 535px;
+  }
 `;
 const Input = styled.textarea`
   resize: none;
@@ -253,6 +280,5 @@ const ReplyLink = styled(Link)`
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  color: #58d8db;
 `;
 export default Feed;

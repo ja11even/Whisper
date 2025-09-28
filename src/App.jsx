@@ -89,8 +89,8 @@ function App() {
             fontSize: "16px",
             maxWidth: "500px",
             padding: "16px 24px",
-            backgroundColor: "#283b89",
-            color: "white",
+            background: "white",
+            color: "#283b89",
             textAlign: "center",
           },
         }}

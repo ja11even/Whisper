@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Heading } from "../Components/Heading";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Memoji1 from "../assets/Memoji1.png";
 import Memoji2 from "../assets/Memoji2.png";
 import Memoji3 from "../assets/Memoji3.png";
@@ -13,6 +13,14 @@ import { Link } from "react-router-dom";
 function Home() {
   const [open, setOpen] = useState(false);
   const [openLogIn, setOpenLogIn] = useState(false);
+  useEffect(() => {
+    const img = new Image();
+    img.src = Memoji1;
+    img.src = Memoji2;
+    img.src = Memoji3;
+    img.src = google;
+    img.src = spotify;
+  }, []);
   return (
     <HomeContainer>
       <HomeWrapper>
@@ -125,7 +133,7 @@ const HomeContainer = styled.div`
 const HomeWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 const Buttons = styled.div`
   display: flex;
@@ -169,7 +177,7 @@ const PicturesDiv = styled.div`
   @media (max-width: 700px) {
     width: 300px;
     gap: 0.5rem;
-    margin-right: 70px;
+    margin-right: 75px;
   }
 `;
 const ImageOneDiv = styled(motion.div)`
