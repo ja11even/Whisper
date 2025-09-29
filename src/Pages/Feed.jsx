@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import FullPageLoader from "../Components/FullPageLoader";
 import TimeAgo from "../Components/TimeAgo";
+import illustration from "../assets/illustration.svg";
 
 function Feed() {
   const [open, setOpen] = useState(false);
@@ -113,6 +114,7 @@ function Feed() {
               );
             })
           )}
+          {/*<IllustrationImage src={illustration} />*/}
         </FeedWrapper>
         <WhisperButtonDiv>
           <WhisperButton onClick={() => setOpen(true)}>
@@ -295,4 +297,5 @@ const ReplyLink = styled(Link)`
   gap: 0.5rem;
   text-decoration: none;
 `;
+const IllustrationImage = styled.img``;
 export default Feed;

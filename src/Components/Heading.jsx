@@ -17,7 +17,7 @@ export const Heading = styled.h1`
     css`
       font-size: 1.3rem;
       font-weight: 400;
-      color: white;
+      color: #11192d;
     `}
     ${(props) =>
     props.as === "h3" &&
@@ -32,11 +32,18 @@ export const Heading = styled.h1`
     ${(props) =>
     props.as === "h4" &&
     css`
-      font-size: 1.2rem;
+      font-size: 1.2rem
       font-weight: 400;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      color: white;
+    `}
+    ${(props) =>
+    props.as === "h5" &&
+    css`
+      font-size: 1.3rem;
+      font-weight: 400;
       color: white;
     `}
 `;

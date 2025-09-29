@@ -56,7 +56,7 @@ function Circle() {
           </CircleMembersDiv>*/}
           <CircleGuidelines>
             <GuidelinesFirstDiv>
-              <Heading as="h2">Circle Guidelines</Heading>
+              <Heading as="h5">Circle Guidelines</Heading>
             </GuidelinesFirstDiv>
             <GuidelinesSecondDiv>
               <GuidelinesText>
