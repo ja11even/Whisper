@@ -8,6 +8,7 @@ import { Form, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import FullPageLoader from "../Components/FullPageLoader";
+import TimeAgo from "../Components/TimeAgo";
 
 function Feed() {
   const [open, setOpen] = useState(false);
@@ -18,12 +19,9 @@ function Feed() {
   const addWhisper = useAddWhisper();
 
   if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
-
+  console.log(fetchWhisper?.data);
   const whispers = fetchWhisper?.data;
   const userId = user?.id;
-  const userName = user?.user_metadata?.userName;
-  const avatar = user?.user_metadata?.avatar_url;
-  console.log(user);
   const toggleLike = (id) => {
     setLikes((prevLikes) => ({ ...prevLikes, [id]: !prevLikes[id] }));
   };
@@ -64,50 +62,56 @@ function Feed() {
               </PostForm>
             </PostWhisperContainer>
           ) : (
-            whispers.map((whisper) => (
-              <WhisperCard key={whisper.id}>
-                <FirstContainer>
-                  <UserDiv>
-                    <UserImage>
-                      {avatar ? (
-                        <AvatarImage src={avatar} />
-                      ) : (
-                        whisper.username.charAt(0).toUpperCase()
-                      )}
-                    </UserImage>
-                    <UserName>{whisper.username}</UserName>
-                  </UserDiv>
-                  <Time>5h ago</Time>
-                </FirstContainer>
-                <SecondContainer>
-                  <Whisper>{whisper.whisper}</Whisper>
-                </SecondContainer>
-                <ThirdContainer>
-                  <ReplyCountDiv>
-                    <motion.div
-                      animate={
-                        likes[whisper.id]
-                          ? { scale: [1, 1.4, 1] }
-                          : { scale: 1 }
-                      }
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Heart
-                        size={20}
-                        onClick={() => toggleLike(whisper.id)}
-                        color={likes[whisper.id] ? "#58d8db" : "#99a1af"}
-                        fill={likes[whisper.id] ? "#58d8db" : "transparent"}
-                      />
-                    </motion.div>
-                  </ReplyCountDiv>
-                  <ViewRepliesDiv>
-                    <ReplyLink to={`/whisper/${whisper.id}`}>
-                      <ArrowRight color="#58d8db" size={20} />
-                    </ReplyLink>
-                  </ViewRepliesDiv>
-                </ThirdContainer>
-              </WhisperCard>
-            ))
+            whispers.map((whisper) => {
+              const avatar = whisper?.profile?.avatar_url;
+              return (
+                <WhisperCard key={whisper.id}>
+                  <FirstContainer>
+                    <UserDiv>
+                      <UserImage>
+                        {avatar ? (
+                          <AvatarImage src={avatar} />
+                        ) : (
+                          whisper?.profile?.userName.charAt(0).toUpperCase()
+                        )}
+                      </UserImage>
+                      <UserName>{whisper?.profile?.userName}</UserName>
+                    </UserDiv>
+                    <Time>
+                      <TimeAgo dateString={whisper?.created_at} />
+                    </Time>
+                  </FirstContainer>
+                  <SecondContainer>
+                    <Whisper>{whisper.whisper}</Whisper>
+                  </SecondContainer>
+                  <ThirdContainer>
+                    <ReplyCountDiv>
+                      <motion.div
+                        animate={
+                          likes[whisper.id]
+                            ? { scale: [1, 1.4, 1] }
+                            : { scale: 1 }
+                        }
+                        transition={{ duration: 0.3 }}
+                      >
+                        <Heart
+                          size={20}
+                          onClick={() => toggleLike(whisper.id)}
+                          color={likes[whisper.id] ? "#58d8db" : "#99a1af"}
+                          fill={likes[whisper.id] ? "#58d8db" : "transparent"}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </motion.div>
+                    </ReplyCountDiv>
+                    <ViewRepliesDiv>
+                      <ReplyLink to={`/whisper/${whisper.id}`}>
+                        <ArrowRight color="#58d8db" size={20} />
+                      </ReplyLink>
+                    </ViewRepliesDiv>
+                  </ThirdContainer>
+                </WhisperCard>
+              );
+            })
           )}
         </FeedWrapper>
         <WhisperButtonDiv>

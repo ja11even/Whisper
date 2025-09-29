@@ -10,18 +10,18 @@ import { useUser } from "../Hooks/useUser";
 import { supabase } from "../Service/Supabase";
 import FullPageLoader from "../Components/FullPageLoader";
 import toast from "react-hot-toast";
-import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 function Settings() {
   const { user, isLoadingUser } = useUser();
-  const { mutate: logOut } = useLogOut();
+  const { mutate: logOut, isPending } = useLogOut();
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [userName, setUserName] = useState(user?.user_metadata?.userName || "");
-  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   if (isLoadingUser) return <FullPageLoader />;
-  const userId = user?.id;
+
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -29,7 +29,6 @@ function Settings() {
     const preview = URL.createObjectURL(file);
     setPreviewUrl(preview);
   };
-  console.log(user);
   async function onSubmit(e) {
     e.preventDefault();
     setUploading(true);
@@ -58,7 +57,17 @@ function Settings() {
         },
       });
       if (uploadError) throw uploadError;
+      if (!uploadError) {
+        await supabase
+          .from("Profiles")
+          .update({
+            userName,
+            avatar_url,
+          })
+          .eq("id", user?.id);
+      }
       toast.success("Profile updated");
+      navigate("/feed");
     } catch (err) {
       console.log(err.message);
       toast.error("Failed to update profile");
@@ -112,9 +121,9 @@ function Settings() {
               </Heading>
               <UserCardText>Sign out of your whisper account</UserCardText>
             </UserCardHeader>
-            <LogOutButton onClick={logOut}>
-              {logOut.isLoading ? (
-                <SpinnerMini width="1.5rem" height="1.5rem" color="#58d8db" />
+            <LogOutButton onClick={logOut} disabled={isPending}>
+              {isPending ? (
+                <SpinnerMini width="1.7rem" height="1.7rem" color="white" />
               ) : (
                 "LogOut"
               )}

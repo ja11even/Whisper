@@ -133,7 +133,10 @@ const HomeContainer = styled.div`
 const HomeWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 60px;
+  @media (max-width: 700px) {
+    margin-top: 20px;
+  }
 `;
 const Buttons = styled.div`
   display: flex;

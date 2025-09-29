@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import FullPageLoader from "../Components/FullPageLoader";
+import TimeAgo from "../Components/TimeAgo";
 
 function Archive() {
   const { user, isLoadingUser } = useUser();
@@ -25,44 +26,55 @@ function Archive() {
       <ArchiveNavbar />
       <ArchiveContainer>
         <ArchiveWrapper>
-          {whispers.map((whisper) => (
-            <WhisperCard key={whisper.id}>
-              <FirstContainer>
-                <UserDiv>
-                  <UserImage>
-                    {whisper.username.charAt(0).toUpperCase()}
-                  </UserImage>
-                  <UserName>{whisper.username}</UserName>
-                </UserDiv>
-                <Time>5h ago</Time>
-              </FirstContainer>
-              <SecondContainer>
-                <Whisper>{whisper.whisper}</Whisper>
-              </SecondContainer>
-              <ThirdContainer>
-                <ReplyCountDiv>
-                  <motion.div
-                    animate={
-                      likes[whisper.id] ? { scale: [1, 1.4, 1] } : { scale: 1 }
-                    }
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Heart
-                      size={20}
-                      onClick={() => toggleLike(whisper.id)}
-                      color={likes[whisper.id] ? "#58d8db" : "#99a1af"}
-                      fill={likes[whisper.id] ? "#58d8db" : "transparent"}
-                    />
-                  </motion.div>
-                </ReplyCountDiv>
-                <ViewRepliesDiv>
-                  <ReplyLink to={`/whisper/${whisper.id}`}>
-                    <ArrowRight color="#58d8db" size={20} />
-                  </ReplyLink>
-                </ViewRepliesDiv>
-              </ThirdContainer>
-            </WhisperCard>
-          ))}
+          {whispers.map((whisper) => {
+            const avatar = whisper?.profile?.avatar_url;
+            return (
+              <WhisperCard key={whisper.id}>
+                <FirstContainer>
+                  <UserDiv>
+                    <UserImage>
+                      {avatar ? (
+                        <AvatarImage src={avatar} />
+                      ) : (
+                        whisper?.profile?.userName.charAt(0).toUpperCase()
+                      )}
+                    </UserImage>
+                    <UserName>{whisper?.profile?.userName}</UserName>
+                  </UserDiv>
+                  <Time>
+                    <TimeAgo dateString={whisper?.created_at} />
+                  </Time>
+                </FirstContainer>
+                <SecondContainer>
+                  <Whisper>{whisper.whisper}</Whisper>
+                </SecondContainer>
+                <ThirdContainer>
+                  <ReplyCountDiv>
+                    <motion.div
+                      animate={
+                        likes[whisper.id]
+                          ? { scale: [1, 1.4, 1] }
+                          : { scale: 1 }
+                      }
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Heart
+                        size={20}
+                        onClick={() => toggleLike(whisper.id)}
+                        color={likes[whisper.id] ? "#58d8db" : "#99a1af"}
+                        fill={likes[whisper.id] ? "#58d8db" : "transparent"}
+                      />
+                    </motion.div>
+                  </ReplyCountDiv>
+                  <ViewRepliesDiv>
+                    <ReplyLink to={`/whisper/${whisper.id}`}>
+                      <ArrowRight color="#58d8db" size={20} />
+                    </ReplyLink>
+                  </ViewRepliesDiv>
+                </ThirdContainer>
+              </WhisperCard>
+            );
+          })}
         </ArchiveWrapper>
       </ArchiveContainer>
     </>
@@ -125,6 +137,12 @@ const UserImage = styled.div`
   align-items: center;
   justify-content: center;
   color: #283b89;
+`;
+const AvatarImage = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 const UserDiv = styled.div`
   display: flex;

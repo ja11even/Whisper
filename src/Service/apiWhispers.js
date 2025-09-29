@@ -11,14 +11,30 @@ export async function fetchWhispers(userId) {
     ...circleMembers.map((m) => m.invited_user_id).filter(Boolean),
   ];
 
-  const { data, error } = await supabase
+  const { data: whisper, error: whisperError } = await supabase
     .from("Whispers")
     .select("*")
     .in("user_id", membersIds)
     .order("created_at", { ascending: false });
+  if (whisperError) throw new Error(whisperError.message);
+  if (!whisper || whisper.length === 0) return [];
 
-  if (error) throw new Error(error.message);
-  return data;
+  const { data: profiles, error: profilesError } = await supabase
+    .from("Profiles")
+    .select("*")
+    .in(
+      "id",
+      whisper.map((w) => w.user_id)
+    );
+
+  if (profilesError) throw new Error(profilesError.message);
+
+  const whispersProfiles = whisper.map((w) => ({
+    ...w,
+    profile: profiles.find((p) => p.id === w.user_id) || null,
+  }));
+
+  return whispersProfiles;
 }
 
 export async function addWhisper(whisper) {

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { useSignUp } from "../Hooks/useSignUp";
+import SpinnerMini from "../Components/SpinnerMini";
 
 function SignUpForm() {
   const {
@@ -64,7 +65,12 @@ function SignUpForm() {
             },
           })}
         />
-        {errors.password && <Error>Password is required</Error>}
+        {errors.password && (
+          <Error>
+            Password must be at least 8 characters, include a number and special
+            character
+          </Error>
+        )}
       </PasswordDiv>
       <ButtonDiv>
         <Button type="submit">

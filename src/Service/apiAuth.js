@@ -17,6 +17,11 @@ export async function signUp({ email, password, userName }) {
       .update({ invited_user_id: data.user.id })
       .eq("invited_email", data.user.email);
   }
+  if (!error) {
+    await supabase
+      .from("Profiles")
+      .insert([{ id: data.user.id, userName: userName, avatar_url: "" }]);
+  }
   if (error) throw new Error(error.message);
   return data;
 }

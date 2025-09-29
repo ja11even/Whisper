@@ -77,19 +77,26 @@ function Circle() {
     </>
   );
 }
-const CircleContainer = styled.div``;
+const CircleContainer = styled.div`
+  min-height: 100vh;
+  padding: 2rem 0;
+  background-color: #58d8db;
+`;
 const CircleWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 70px;
+  @media (max-width: 700px) {
+    max-width: 370px;
+  }
 `;
 const InviteCard = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
   padding: 2rem;
   border-radius: 10px;
-  background-color: #9ae600;
+  background-color: #283b89;
   padding-top: 1.5rem;
 `;
 const InviteDiv = styled.div`
@@ -114,7 +121,6 @@ const Input = styled.input`
   padding: 0 0.5rem;
   font-family: inherit;
   font-size: 1rem;
-  caret-color: #9ae600;
   &:hover {
     cursor: pointer;
   }
@@ -124,7 +130,7 @@ const Input = styled.input`
 `;
 const Form = styled.form``;
 const InviteButton = styled.button`
-  background-color: black;
+  background-color: #11192d;
   color: white;
   padding: 0.6rem 1.5rem;
   border-radius: 5px;
@@ -157,7 +163,9 @@ const MembersDiv = styled.div``;
 const CircleGuidelines = styled.div`
   padding: 2rem;
   border-radius: 10px;
-  background-color: #9ae600;
+  background-color: #283b89;
+  padding-top: 1.5rem;
+  color: white;
 `;
 const GuidelinesFirstDiv = styled.div``;
 const GuidelinesSecondDiv = styled.div``;
