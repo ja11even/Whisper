@@ -21,7 +21,7 @@ function Settings() {
   const [userName, setUserName] = useState(user?.user_metadata?.userName || "");
   const navigate = useNavigate();
   if (isLoadingUser) return <FullPageLoader />;
-
+  const currentUserName = user?.user_metadata?.userName;
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -34,6 +34,8 @@ function Settings() {
     setUploading(true);
     try {
       let avatar_url = user?.user_metadata?.avatar_url;
+      if (!selectedFile || !userName.trim()) return;
+      if (userName === currentUserName) return;
       if (selectedFile) {
         const fileExt = selectedFile.name.split(".").pop();
         const fileName = `${user.id}-${uuidv4()}.${fileExt}`;
@@ -82,13 +84,13 @@ function Settings() {
         <SettingsWrapper>
           <UserCard as="form" onSubmit={onSubmit}>
             <UserCardHeader>
-              <Heading as="h4">
+              <Heading as="h4" style={{ fontSize: "1.2rem" }}>
                 <UsersRound size={20} /> Profile
               </Heading>
               <UserCardText>Manage how you appear to your circle</UserCardText>
             </UserCardHeader>
             <DisplayName>
-              <Label>User Name</Label>
+              <Label>Username</Label>
               <Input
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
@@ -103,20 +105,20 @@ function Settings() {
               />
               {previewUrl && <PreviewImg src={previewUrl} />}
               <AvatarLabel htmlFor="avatar">
-                Upload profile <Upload size={20} />
+                Upload avatar <Upload size={20} />
               </AvatarLabel>
             </ProfilePictureDiv>
             <Button type="submit" disabled={uploading}>
               {uploading ? (
-                <SpinnerMini width="1.6rem" height="1.6rem" color="white" />
+                <SpinnerMini width="1.7rem" height="1.7rem" color="white" />
               ) : (
-                "Save Profile Changes"
+                "Save profile"
               )}
             </Button>
           </UserCard>
           <LogOutCard>
             <UserCardHeader>
-              <Heading as="h4">
+              <Heading as="h4" style={{ fontSize: "1.2rem" }}>
                 <LogOut size={20} /> Log Out
               </Heading>
               <UserCardText>Sign out of your whisper account</UserCardText>
@@ -125,7 +127,7 @@ function Settings() {
               {isPending ? (
                 <SpinnerMini width="1.7rem" height="1.7rem" color="white" />
               ) : (
-                "LogOut"
+                "Log Out"
               )}
             </LogOutButton>
           </LogOutCard>
@@ -167,7 +169,7 @@ const UserCardHeader = styled.div`
 `;
 const UserCardText = styled.p`
   color: white;
-  font-size: 1rem;
+  font-size: 0.95rem;
 `;
 const DisplayName = styled.div`
   display: flex;
@@ -176,11 +178,15 @@ const DisplayName = styled.div`
 `;
 const Label = styled.label`
   color: white;
+  font-size: 1.1rem;
 `;
 const Input = styled.input`
   width: auto;
   height: 30px;
   border: none;
+  border-top: 1px solid #283b89;
+  border-left: 1px solid #283b89;
+  border-right: 1px solid #283b89;
   border-bottom: 1px solid white;
   background-color: transparent;
   font-family: inherit;
@@ -203,6 +209,10 @@ const Button = styled.button`
   margin-top: 15px;
   font-family: inherit;
   font-size: 0.9rem;
+  width: 100px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const LogOutButton = styled.button`
   border: none;
@@ -213,6 +223,10 @@ const LogOutButton = styled.button`
   color: white;
   height: 45px;
   font-size: 0.9rem;
+  width: 100px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const HiddenInput = styled.input`
@@ -242,7 +256,8 @@ const PreviewImg = styled.img`
 `;
 const ProfilePictureDiv = styled.div`
   display: flex;
-  margin-top: 10px;
+  margin-top: 15px;
   gap: 1rem;
+  align-items: center;
 `;
 export default Settings;

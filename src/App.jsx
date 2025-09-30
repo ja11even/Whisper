@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import { GlobalStyles } from "./Styles/GlobalStyles";
 import Feed from "./Pages/Feed";
@@ -10,7 +10,6 @@ import Archive from "./Pages/Archive";
 import Settings from "./Pages/Settings";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./AppLayout";
-import ScrollToTop from "./Components/ScrollToTop";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import WhisperDetailPage from "./Pages/WhisperDetailPage";
 
@@ -27,7 +26,6 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <GlobalStyles />
       <ReactQueryDevtools initialIsOpen={false} />
-      <ScrollToTop />
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />

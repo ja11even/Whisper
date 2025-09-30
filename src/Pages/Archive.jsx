@@ -4,16 +4,20 @@ import { ArrowRight, Heart, MessageCircle } from "lucide-react";
 import { useUser } from "../Hooks/useUser";
 import { useFetchWhisper } from "../Hooks/useWhispers";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import FullPageLoader from "../Components/FullPageLoader";
 import TimeAgo from "../Components/TimeAgo";
+import archive from "../assets/archive.svg";
 
 function Archive() {
   const { user, isLoadingUser } = useUser();
   const [likes, setLikes] = useState({});
   const fetchWhisper = useFetchWhisper();
-
+  useEffect(() => {
+    const img = new Image();
+    img.src = archive;
+  }, []);
   if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
 
   const whispers = fetchWhisper?.data;
@@ -75,6 +79,16 @@ function Archive() {
               </WhisperCard>
             );
           })}
+          {whispers.length === 0 && (
+            <Illustration>
+              <IllustrationImage src={archive} />
+              <IllustrationText>Your archive is empty</IllustrationText>
+              <IllustrationText style={{ fontSize: "1.2rem" }}>
+                {" "}
+                Whispers rest here after 48 hours
+              </IllustrationText>
+            </Illustration>
+          )}
         </ArchiveWrapper>
       </ArchiveContainer>
     </>
@@ -164,5 +178,27 @@ const Time = styled.div`
 `;
 const Whisper = styled.p`
   color: white;
+`;
+const IllustrationImage = styled.img`
+  width: 1000px;
+  height: 490px;
+  margin-bottom: 20px;
+  @media (max-width: 700px) {
+    width: 100%;
+    height: 100%;
+  }
+`;
+const Illustration = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 700px) {
+    height: 600px;
+  }
+`;
+const IllustrationText = styled.p`
+  color: #283b89;
+  font-size: 1.5rem;
 `;
 export default Archive;

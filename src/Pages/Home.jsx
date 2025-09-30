@@ -10,17 +10,18 @@ import spotify from "../assets/spotify.png";
 import SignUpForm from "../Forms/SignUpForm";
 import LogInForm from "../Forms/LogInForm";
 import { Link } from "react-router-dom";
+
 function Home() {
   const [open, setOpen] = useState(false);
   const [openLogIn, setOpenLogIn] = useState(false);
   useEffect(() => {
-    const img = new Image();
-    img.src = Memoji1;
-    img.src = Memoji2;
-    img.src = Memoji3;
-    img.src = google;
-    img.src = spotify;
+    const images = [Memoji1, Memoji2, Memoji3, google, spotify];
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
   }, []);
+
   return (
     <HomeContainer>
       <HomeWrapper>

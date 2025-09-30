@@ -8,6 +8,7 @@ import { ArrowRight, MessageCircle, SendHorizontal } from "lucide-react";
 import { useUser } from "../Hooks/useUser";
 import { useAddReplies, useFetchReplies } from "../Hooks/useReplies";
 import { useForm } from "react-hook-form";
+import TimeAgo from "../Components/TimeAgo";
 
 function WhisperDetailPage() {
   const { whisperId } = useParams();
@@ -21,12 +22,28 @@ function WhisperDetailPage() {
   useEffect(() => {
     async function fetchWhisper() {
       setLoading(true);
-      const { data, error } = await supabase
+      const { data: whisperData, error: whisperError } = await supabase
         .from("Whispers")
         .select("*")
         .eq("id", whisperId)
         .single();
-      if (!error) setWhisper(data);
+      if (whisperError) throw whisperError;
+      if (!whisperData) return;
+
+      const { data: profileData, error: profileError } = await supabase
+        .from("Profiles")
+        .select("*")
+        .eq("id", whisperData.user_id)
+        .single();
+
+      if (profileError) throw profileError;
+
+      const whisperWithProfile = {
+        ...whisperData,
+        profileData,
+      };
+
+      if (!whisperError) setWhisper(whisperWithProfile);
       setLoading(false);
     }
     fetchWhisper();
@@ -39,8 +56,7 @@ function WhisperDetailPage() {
   const userId = user?.id;
   const reply = fetchReply?.data;
   const userName = user?.user_metadata?.userName;
-  console.log(reply);
-
+  console.log(whisper);
   function onSubmit(data) {
     if (!data.reply.trim()) return;
     const replyData = {
@@ -55,7 +71,7 @@ function WhisperDetailPage() {
       },
     });
   }
-
+  const avatar = whisper?.profileData?.avatar_url;
   return (
     <>
       <WhisperDetailNavbar />
@@ -65,11 +81,17 @@ function WhisperDetailPage() {
             <FirstContainer>
               <UserDiv>
                 <UserImage>
-                  {whisper?.username.charAt(0).toUpperCase()}
+                  {avatar ? (
+                    <AvatarImage src={avatar} />
+                  ) : (
+                    whisper?.profileData?.userName.charAt(0).toUpperCase()
+                  )}
                 </UserImage>
-                <UserName>{whisper?.username}</UserName>
+                <UserName>{whisper?.profileData?.userName}</UserName>
               </UserDiv>
-              <Time>5h ago</Time>
+              <Time>
+                <TimeAgo dateString={whisper?.created_at} />
+              </Time>
             </FirstContainer>
             <SecondContainer>
               <Whisper>{whisper?.whisper}</Whisper>
@@ -119,7 +141,10 @@ const WhisperDetailContainer = styled.div`
 const WhisperWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 70px;
+  @media (max-width: 700px) {
+    max-width: 370px;
+  }
 `;
 
 const WhisperCard = styled.div`
@@ -128,8 +153,7 @@ const WhisperCard = styled.div`
   height: auto;
   padding: 2rem;
   border-radius: 10px;
-  margin-bottom: 10px;
-  padding-bottom: 1.5rem;
+  margin-bottom: 5px;
 `;
 const FirstContainer = styled.div`
   display: flex;
@@ -165,7 +189,13 @@ const UserImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9ae600;
+  color: #283b89;
+`;
+const AvatarImage = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 const CurrentUserImage = styled.div`
   height: 35px;
@@ -183,9 +213,15 @@ const UserDiv = styled.div`
   align-items: center;
   gap: 1rem;
 `;
-const UserName = styled.p``;
-const Time = styled.p``;
-const Whisper = styled.p``;
+const UserName = styled.p`
+  color: white;
+`;
+const Time = styled.p`
+  color: #58d8db;
+`;
+const Whisper = styled.p`
+  color: white;
+`;
 const ReplyInput = styled.input`
   border: none;
   width: 100%;

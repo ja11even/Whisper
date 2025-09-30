@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Navbar from "../Components/Navbar";
 import { ArrowRight, Heart, MessageCircle, Plus } from "lucide-react";
 import { useUser } from "../Hooks/useUser";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAddWhisper, useFetchWhisper } from "../Hooks/useWhispers";
 import { Form, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -18,6 +18,11 @@ function Feed() {
   const { handleSubmit, reset, register } = useForm();
   const fetchWhisper = useFetchWhisper();
   const addWhisper = useAddWhisper();
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = illustration;
+  }, []);
 
   if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
   console.log(fetchWhisper?.data);
@@ -114,7 +119,15 @@ function Feed() {
               );
             })
           )}
-          {/*<IllustrationImage src={illustration} />*/}
+          {!open && whispers.length === 0 && (
+            <Illustration>
+              <IllustrationImage src={illustration} />
+              <IllustrationText>Create your first whisper</IllustrationText>
+              <IllustrationText style={{ fontSize: "1.2rem" }}>
+                Give this space some love.
+              </IllustrationText>
+            </Illustration>
+          )}
         </FeedWrapper>
         <WhisperButtonDiv>
           <WhisperButton onClick={() => setOpen(true)}>
@@ -297,5 +310,26 @@ const ReplyLink = styled(Link)`
   gap: 0.5rem;
   text-decoration: none;
 `;
-const IllustrationImage = styled.img``;
+const IllustrationImage = styled.img`
+  width: 1000px;
+  height: 490px;
+  margin-bottom: 20px;
+  @media (max-width: 700px) {
+    width: 100%;
+    height: 100%;
+  }
+`;
+const Illustration = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 700px) {
+    height: 600px;
+  }
+`;
+const IllustrationText = styled.p`
+  color: #283b89;
+  font-size: 1.5rem;
+`;
 export default Feed;
