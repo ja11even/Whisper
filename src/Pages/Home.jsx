@@ -23,7 +23,8 @@ function Home() {
   }, []);
   useEffect(() => {
     if (open || openLogIn) {
-      document.body.style.overflow = "auto";
+      document.body.style.overflowY = "auto";
+      document.body.style.overflowX = "hidden";
     } else {
       document.body.style.overflow = "hidden";
     }
@@ -139,7 +140,7 @@ const HomeWrapper = styled.div`
   margin: auto;
   margin-top: 60px;
   @media (max-width: 700px) {
-    margin-top: 20px;
+    margin-top: 15px;
   }
 `;
 const Buttons = styled.div`

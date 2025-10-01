@@ -24,6 +24,16 @@ function Feed() {
     img.src = illustration;
   }, []);
 
+  useEffect(() => {
+    if (fetchWhisper.isLoading) return;
+    if (!open && whispers.length === 0) {
+      document.body.style.overflowX = "hidden";
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+  });
+
   if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
   console.log(fetchWhisper?.data);
   const whispers = fetchWhisper?.data;
