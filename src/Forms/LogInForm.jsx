@@ -50,6 +50,9 @@ const Input = styled.input`
   width: 100%;
   height: 40px;
   border: none;
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
   border-bottom: 1px solid #283b89;
   padding: 0rem 0.5rem;
   font-family: inherit;

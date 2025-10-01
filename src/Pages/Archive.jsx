@@ -84,8 +84,8 @@ function Archive() {
               <IllustrationImage src={archive} />
               <IllustrationText>Your archive is empty</IllustrationText>
               <IllustrationText style={{ fontSize: "1.2rem" }}>
-                {" "}
-                Whispers rest here after 48 hours
+                Whispers older than{" "}
+                <span style={{ color: "white" }}>7 days</span> rest here.
               </IllustrationText>
             </Illustration>
           )}
@@ -194,7 +194,7 @@ const Illustration = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 700px) {
-    height: 600px;
+    height: 450px;
   }
 `;
 const IllustrationText = styled.p`

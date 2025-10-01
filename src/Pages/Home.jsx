@@ -10,12 +10,16 @@ import spotify from "../assets/spotify.png";
 import SignUpForm from "../Forms/SignUpForm";
 import LogInForm from "../Forms/LogInForm";
 import { Link } from "react-router-dom";
+import Memoji4 from "../assets/Memoji4.png";
+import Memoji5 from "../assets/Memoji5.png";
+import Memoji6 from "../assets/Memoji6.png";
+import Memoji9 from "../assets/Memoji9.png";
 
 function Home() {
   const [open, setOpen] = useState(false);
   const [openLogIn, setOpenLogIn] = useState(false);
   useEffect(() => {
-    const images = [Memoji1, Memoji2, Memoji3, google, spotify];
+    const images = [Memoji1, Memoji2, Memoji3, Memoji4, google, spotify];
     images.forEach((src) => {
       const img = new Image();
       img.src = src;
@@ -26,7 +30,8 @@ function Home() {
       document.body.style.overflowY = "auto";
       document.body.style.overflowX = "hidden";
     } else {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflowX = "hidden";
+      document.body.style.overflowY = "hidden";
     }
   }, [open, openLogIn]);
 
@@ -38,12 +43,12 @@ function Home() {
           <ImageOneDiv animate={{ rotateY: 0 }}>
             <ImageOne src={Memoji1} />
           </ImageOneDiv>
-          <ImageOneDiv>
-            <ImageOne src={Memoji2} />
-          </ImageOneDiv>
-          <ImageOneDiv animate={{ rotateY: 0 }}>
-            <ImageOne src={Memoji3} />
-          </ImageOneDiv>
+          <ImageTwoDiv>
+            <ImageOne src={Memoji5} />
+          </ImageTwoDiv>
+          <ImageThreeDiv animate={{ rotateY: 0 }}>
+            <ImageOne src={Memoji4} />
+          </ImageThreeDiv>
         </PicturesDiv>
         <BodyHeader>
           <Heading as="h1">Say what's on your mind</Heading>
@@ -176,28 +181,58 @@ const BodyText = styled.p`
   }
 `;
 const PicturesDiv = styled.div`
-  width: 620px;
   display: flex;
   justify-content: center;
   margin: auto;
-  margin-top: 10px;
-
+  margin-top: 40px;
+  margin-bottom: 20px;
+  max-width: 100%;
+  gap: 5rem;
   @media (max-width: 700px) {
-    width: 300px;
-    gap: 0.5rem;
-    margin-right: 72px;
+    gap: 1.2rem;
+    border: 1px solid black;
   }
 `;
 const ImageOneDiv = styled(motion.div)`
   border-radius: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 140px;
   @media (max-width: 700px) {
-    width: 120px;
+    width: 110px;
+    margin-left: 5px;
+  }
+`;
+const ImageTwoDiv = styled(motion.div)`
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 140px;
+  margin-right: 5px;
+  @media (max-width: 700px) {
+    width: 110px;
+    margin-right: 0px;
+  }
+`;
+const ImageThreeDiv = styled(motion.div)`
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 140px;
+  @media (max-width: 700px) {
+    width: 110px;
   }
 `;
 const ImageOne = styled.img`
-  object-fit: cover;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 `;
 const GetStartedButton = styled.button`
   border: none;

@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import AppLayout from "./AppLayout";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import WhisperDetailPage from "./Pages/WhisperDetailPage";
+import ScrollToTop from "./Components/ScrollToTop";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,6 +26,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyles />
+      <ScrollToTop />
       <ReactQueryDevtools initialIsOpen={false} />
       <Routes>
         <Route element={<AppLayout />}>

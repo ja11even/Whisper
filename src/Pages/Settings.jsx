@@ -209,7 +209,7 @@ const Button = styled.button`
   margin-top: 15px;
   font-family: inherit;
   font-size: 0.9rem;
-  width: 100px;
+  width: fit-content;
   &:hover {
     cursor: pointer;
   }

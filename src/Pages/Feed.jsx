@@ -133,8 +133,9 @@ function Feed() {
             <Illustration>
               <IllustrationImage src={illustration} />
               <IllustrationText>Create your first whisper</IllustrationText>
-              <IllustrationText style={{ fontSize: "1.2rem" }}>
-                Give this space some love.
+              <IllustrationText style={{ fontSize: "1.1rem" }}>
+                Whispers from the last{" "}
+                <span style={{ color: "white" }}>7 days</span> live here.
               </IllustrationText>
             </Illustration>
           )}
