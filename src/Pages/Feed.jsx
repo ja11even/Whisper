@@ -325,7 +325,7 @@ const Illustration = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 700px) {
-    height: 600px;
+    height: 450px;
   }
 `;
 const IllustrationText = styled.p`

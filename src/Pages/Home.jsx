@@ -21,6 +21,13 @@ function Home() {
       img.src = src;
     });
   }, []);
+  useEffect(() => {
+    if (open || openLogIn) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+  }, [open, openLogIn]);
 
   return (
     <HomeContainer>
@@ -126,10 +133,6 @@ const HomeContainer = styled.div`
   background-color: #283b89;
   min-height: 100vh;
   padding: 2rem 0;
-  @media (max-width: 700px) {
-    min-height: 100vh;
-    overflow: hidden;
-  }
 `;
 const HomeWrapper = styled.div`
   max-width: 1000px;
