@@ -19,9 +19,9 @@ function Settings() {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [userName, setUserName] = useState(user?.user_metadata?.userName || "");
+  const currentUserName = user?.user_metadata?.userName;
   const navigate = useNavigate();
   if (isLoadingUser) return <FullPageLoader />;
-  const currentUserName = user?.user_metadata?.userName;
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -34,8 +34,7 @@ function Settings() {
     setUploading(true);
     try {
       let avatar_url = user?.user_metadata?.avatar_url;
-      if (!selectedFile || !userName.trim()) return;
-      if (userName === currentUserName) return;
+      if (!selectedFile && userName === currentUserName) return;
       if (selectedFile) {
         const fileExt = selectedFile.name.split(".").pop();
         const fileName = `${user.id}-${uuidv4()}.${fileExt}`;
@@ -151,15 +150,13 @@ const SettingsWrapper = styled.div`
   }
 `;
 const UserCard = styled.div`
-  padding: 2rem;
-  padding-top: 1.5rem;
+  padding: 1.5rem;
   border-radius: 10px;
   background-color: #283b89;
   margin-bottom: 5px;
 `;
 const LogOutCard = styled.div`
-  padding: 2rem;
-  padding-top: 1.5rem;
+  padding: 1.5rem;
   border-radius: 10px;
   background-color: #283b89;
 `;
@@ -209,21 +206,21 @@ const Button = styled.button`
   margin-top: 15px;
   font-family: inherit;
   font-size: 0.9rem;
-  width: fit-content;
+  width: auto;
   &:hover {
     cursor: pointer;
   }
 `;
 const LogOutButton = styled.button`
   border: none;
-  border-radius: 5px;
-  padding: 0.7rem 1.5rem;
-  font-family: inherit;
   background-color: #11192d;
-  color: white;
+  padding: 0.7rem;
   height: 45px;
+  color: white;
+  border-radius: 5px;
+  font-family: inherit;
   font-size: 0.9rem;
-  width: 100px;
+  width: auto;
   &:hover {
     cursor: pointer;
   }

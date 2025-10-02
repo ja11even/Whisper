@@ -51,6 +51,14 @@ function Feed() {
       },
     });
   }
+
+  const text1 = "Create your first whisper";
+  const text2 = "Whispers from the last 7 days live here.";
+  const charDuration = 0.05;
+  const delay = 0.05;
+  const text1Duration = text1.length * delay + charDuration;
+  const highlightStart = text2.indexOf("7 days");
+  const highlightEnd = highlightStart + "7 days".length;
   return (
     <>
       <Navbar />
@@ -132,10 +140,37 @@ function Feed() {
           {!open && whispers.length === 0 && (
             <Illustration>
               <IllustrationImage src={illustration} />
-              <IllustrationText>Create your first whisper</IllustrationText>
+              <IllustrationText>
+                {text1.split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: charDuration, delay: i * delay }}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </IllustrationText>
               <IllustrationText style={{ fontSize: "1.1rem" }}>
-                Whispers from the last{" "}
-                <span style={{ color: "white" }}>7 days</span> live here.
+                {text2.split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: charDuration,
+                      delay: text1Duration + i * delay,
+                    }}
+                    style={
+                      i >= highlightStart && i < highlightEnd
+                        ? { color: "white" }
+                        : {}
+                    }
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
               </IllustrationText>
             </Illustration>
           )}
@@ -339,7 +374,7 @@ const Illustration = styled.div`
     height: 450px;
   }
 `;
-const IllustrationText = styled.p`
+const IllustrationText = styled(motion.p)`
   color: #283b89;
   font-size: 1.5rem;
 `;

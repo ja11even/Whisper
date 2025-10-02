@@ -190,7 +190,6 @@ const PicturesDiv = styled.div`
   gap: 5rem;
   @media (max-width: 700px) {
     gap: 1.2rem;
-    border: 1px solid black;
   }
 `;
 const ImageOneDiv = styled(motion.div)`

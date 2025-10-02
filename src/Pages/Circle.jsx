@@ -14,6 +14,7 @@ function Circle() {
   const userId = user?.id;
   async function onSubmit(data) {
     if (!data.invited_email?.trim()) return;
+    if (data.invited_email === user?.email) return;
     const circleData = { ...data, inviter_user_id: userId };
     addCircle.mutate(circleData, {
       onSuccess: () => {
@@ -32,10 +33,6 @@ function Circle() {
               <UserRoundPlus size={20} color="white" />
               Invite a friend
             </InviteDiv>
-            {/*<TextDiv>
-              Invite someone you trust to join your circle. They'll be able to
-              see and reply to whispers anonymously.
-            </TextDiv>*/}
             <Form onSubmit={handleSubmit(onSubmit)}>
               <EmailDiv>
                 <Input type="email" {...register("invited_email")} />
@@ -45,27 +42,15 @@ function Circle() {
               </EmailDiv>
             </Form>
           </InviteCard>
-          {/*<CircleMembersDiv>
-            <MembersFirstDiv>
-              <Heading as="h2">Circle Members</Heading>
-            </MembersFirstDiv>
-            <MembersSecondDiv>
-              <UserDiv>You</UserDiv>
-              <MembersDiv>User</MembersDiv>
-            </MembersSecondDiv>
-          </CircleMembersDiv>*/}
           <CircleGuidelines>
-            <GuidelinesFirstDiv>
-              <Heading as="h5">Circle Guidelines</Heading>
-            </GuidelinesFirstDiv>
+            <GuidelinesFirstDiv>Circle Guidelines</GuidelinesFirstDiv>
             <GuidelinesSecondDiv>
+              <GuidelinesText>
+                Invite: Invite someone you trust to join your circle via email.
+              </GuidelinesText>
               <GuidelinesText>
                 Anonymity: All whispers are shared anonymously within your
                 circle
-              </GuidelinesText>
-              <GuidelinesText>
-                One Reply: Each member can reply once per whisper to encourage
-                thoughtful responses
               </GuidelinesText>
               <GuidelinesText>
                 Privacy: What's shared in the circle stays in the circle
@@ -94,10 +79,9 @@ const InviteCard = styled.div`
   margin-bottom: 5px;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 10px;
   background-color: #283b89;
-  padding-top: 1.5rem;
 `;
 const InviteDiv = styled.div`
   display: flex;
@@ -106,12 +90,16 @@ const InviteDiv = styled.div`
   color: white;
   font-size: 1.2rem;
 `;
+
 const EmailDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  margin-top: 20px;
+  margin-top: 10px;
+  @media (max-width: 700px) {
+    gap: 1rem;
+  }
 `;
 const Input = styled.input`
   width: 100%;
@@ -144,31 +132,22 @@ const InviteButton = styled.button`
     cursor: pointer;
   }
 `;
-const TextDiv = styled.div`
-  color: white;
-  font-size: 1rem;
-`;
-const CircleMembersDiv = styled.div`
-  background-color: #9ae600;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  margin-bottom: 30px;
-`;
-const MembersFirstDiv = styled.div``;
-const MembersSecondDiv = styled.div``;
-const UserDiv = styled.div``;
-const MembersDiv = styled.div``;
+
 const CircleGuidelines = styled.div`
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 10px;
   background-color: #283b89;
-  padding-top: 1.5rem;
   color: white;
 `;
-const GuidelinesFirstDiv = styled.div``;
-const GuidelinesSecondDiv = styled.div``;
-const GuidelinesText = styled.p``;
+const GuidelinesFirstDiv = styled.div`
+  color: white;
+  font-size: 1.2rem;
+`;
+const GuidelinesSecondDiv = styled.div`
+  margin-top: 10px;
+`;
+const GuidelinesText = styled.p`
+  font-size: 1.05rem;
+`;
 
 export default Circle;

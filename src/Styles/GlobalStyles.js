@@ -18,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
 body{
     line-height: 1.6;
     font-family: "Neutral Sans";
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
 html{
