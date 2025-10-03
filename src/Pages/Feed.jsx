@@ -8,12 +8,11 @@ import { Form, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import FullPageLoader from "../Components/FullPageLoader";
-import TimeAgo from "../Components/TimeAgo";
 import illustration from "../assets/illustration.svg";
+import WhisperCard from "../Components/WhisperCard";
 
 function Feed() {
   const [open, setOpen] = useState(false);
-  const [likes, setLikes] = useState({});
   const { user, isLoadingUser } = useUser();
   const { handleSubmit, reset, register } = useForm();
   const fetchWhisper = useFetchWhisper();
@@ -35,12 +34,10 @@ function Feed() {
   });
 
   if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
-  console.log(fetchWhisper?.data);
+
   const whispers = fetchWhisper?.data;
   const userId = user?.id;
-  const toggleLike = (id) => {
-    setLikes((prevLikes) => ({ ...prevLikes, [id]: !prevLikes[id] }));
-  };
+
   function onSubmit(data) {
     if (!data.whisper?.trim()) return;
     const whisperData = { ...data, user_id: userId };
@@ -86,56 +83,14 @@ function Feed() {
               </PostForm>
             </PostWhisperContainer>
           ) : (
-            whispers.map((whisper) => {
-              const avatar = whisper?.profile?.avatar_url;
-              return (
-                <WhisperCard key={whisper.id}>
-                  <FirstContainer>
-                    <UserDiv>
-                      <UserImage>
-                        {avatar ? (
-                          <AvatarImage src={avatar} />
-                        ) : (
-                          whisper?.profile?.userName.charAt(0).toUpperCase()
-                        )}
-                      </UserImage>
-                      <UserName>{whisper?.profile?.userName}</UserName>
-                    </UserDiv>
-                    <Time>
-                      <TimeAgo dateString={whisper?.created_at} />
-                    </Time>
-                  </FirstContainer>
-                  <SecondContainer>
-                    <Whisper>{whisper.whisper}</Whisper>
-                  </SecondContainer>
-                  <ThirdContainer>
-                    <ReplyCountDiv>
-                      <motion.div
-                        animate={
-                          likes[whisper.id]
-                            ? { scale: [1, 1.4, 1] }
-                            : { scale: 1 }
-                        }
-                        transition={{ duration: 0.3 }}
-                      >
-                        <Heart
-                          size={20}
-                          onClick={() => toggleLike(whisper.id)}
-                          color={likes[whisper.id] ? "#58d8db" : "#99a1af"}
-                          fill={likes[whisper.id] ? "#58d8db" : "transparent"}
-                          style={{ cursor: "pointer" }}
-                        />
-                      </motion.div>
-                    </ReplyCountDiv>
-                    <ViewRepliesDiv>
-                      <ReplyLink to={`/whisper/${whisper.id}`}>
-                        <ArrowRight color="#58d8db" size={20} />
-                      </ReplyLink>
-                    </ViewRepliesDiv>
-                  </ThirdContainer>
-                </WhisperCard>
-              );
-            })
+            whispers.map((whisper) => (
+              <WhisperCard
+                key={whisper?.id}
+                whisper={whisper}
+                whisperId={whisper?.id}
+                userId={user?.id}
+              />
+            ))
           )}
           {!open && whispers.length === 0 && (
             <Illustration>
@@ -199,69 +154,7 @@ const FeedWrapper = styled.div`
     max-width: 370px;
   }
 `;
-const WhisperCard = styled.div`
-  width: 100%;
-  background-color: #283b89;
-  height: auto;
-  padding: 2rem;
-  border-radius: 10px;
-  margin-bottom: 5px;
-`;
-const FirstContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-const SecondContainer = styled.div`
-  margin-top: 10px;
-`;
-const ThirdContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
-const ViewRepliesDiv = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-const ReplyCountDiv = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #99a1af;
-`;
-const UserImage = styled.div`
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #283b89;
-`;
-const AvatarImage = styled.img`
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-`;
-const UserDiv = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-const UserName = styled.p`
-  color: white;
-`;
-const Time = styled.p`
-  color: #58d8db;
-`;
-const Whisper = styled.p`
-  color: white;
-`;
+
 const WhisperButton = styled.button`
   border: none;
   border: 1px solid #58d8db;
@@ -350,12 +243,7 @@ const Buttons = styled.div`
   justify-content: space-between;
 `;
 const Filler = styled.div``;
-const ReplyLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-`;
+
 const IllustrationImage = styled.img`
   width: 1000px;
   height: 490px;

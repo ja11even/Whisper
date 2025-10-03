@@ -46,14 +46,16 @@ function Circle() {
             <GuidelinesFirstDiv>Circle Guidelines</GuidelinesFirstDiv>
             <GuidelinesSecondDiv>
               <GuidelinesText>
-                Invite: Invite someone you trust to join your circle via email.
+                <span style={{ color: "#58d8db" }}> Invite -</span> Invite
+                someone you trust to join your circle via email.
               </GuidelinesText>
               <GuidelinesText>
-                Anonymity: All whispers are shared anonymously within your
-                circle
+                <span style={{ color: "#58d8db" }}> Anonymity -</span> All
+                whispers are shared anonymously within your circle
               </GuidelinesText>
               <GuidelinesText>
-                Privacy: What's shared in the circle stays in the circle
+                <span style={{ color: "#58d8db" }}> Privacy -</span> What's
+                shared in the circle stays in the circle
               </GuidelinesText>
             </GuidelinesSecondDiv>
           </CircleGuidelines>

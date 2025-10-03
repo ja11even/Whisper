@@ -206,7 +206,6 @@ const Button = styled.button`
   margin-top: 15px;
   font-family: inherit;
   font-size: 0.9rem;
-  width: auto;
   &:hover {
     cursor: pointer;
   }

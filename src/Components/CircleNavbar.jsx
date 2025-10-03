@@ -20,7 +20,7 @@ function CircleNavbar() {
   return (
     <Nav scroll={scroll}>
       <NavContainer>
-        <NavDiv>
+        <NavDiv scroll={scroll}>
           <Navigate size={20} onClick={() => navigate(-1)} />
           <CircleDiv>
             <UsersRound size={20} />

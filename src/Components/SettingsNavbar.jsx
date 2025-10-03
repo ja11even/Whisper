@@ -19,7 +19,7 @@ function SettingsNavbar() {
   return (
     <Nav scroll={scroll}>
       <NavContainer>
-        <NavDiv>
+        <NavDiv scroll={scroll}>
           <Arrow size={20} onClick={() => navigate(-1)} />
           <SettingsDiv>
             <Settings size={20} />
