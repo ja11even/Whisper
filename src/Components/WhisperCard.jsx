@@ -3,13 +3,7 @@ import { useLikes } from "../Hooks/useLikes";
 import { Link } from "react-router-dom";
 import TimeAgo from "./TimeAgo";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  ChevronRight,
-  Heart,
-  MessageCircle,
-  Plus,
-} from "lucide-react";
+import { ChevronRight, Heart } from "lucide-react";
 
 function WhisperCard({ whisperId, userId, whisper }) {
   const { liked, count, toggleLike } = useLikes(whisperId, userId);
@@ -68,7 +62,7 @@ const WhisperCardContainer = styled.div`
   width: 100%;
   background-color: #283b89;
   height: auto;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 10px;
   margin-bottom: 5px;
 `;

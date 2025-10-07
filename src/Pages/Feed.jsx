@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import Navbar from "../Components/Navbar";
-import { ArrowRight, Heart, MessageCircle, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useUser } from "../Hooks/useUser";
 import { useEffect, useState } from "react";
 import { useAddWhisper, useFetchWhisper } from "../Hooks/useWhispers";
-import { Form, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import FullPageLoader from "../Components/FullPageLoader";
 import illustration from "../assets/illustration.svg";
@@ -25,7 +24,7 @@ function Feed() {
 
   useEffect(() => {
     if (fetchWhisper.isLoading) return;
-    if (!open && whispers.length === 0) {
+    if (!open && whispers?.length === 0) {
       document.body.style.overflowX = "hidden";
       document.body.style.overflowY = "hidden";
     } else {

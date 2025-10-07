@@ -1,12 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ArrowLeft, UsersRound } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
 function WhisperDetailNavbar() {
+  const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScroll(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [setScroll]);
+
   return (
-    <Nav>
+    <Nav scroll={scroll}>
       <NavContainer>
-        <NavDiv>
+        <NavDiv scroll={scroll}>
           <Navigate size={20} onClick={() => navigate(-1)} />
           <CircleDiv>Back to feed</CircleDiv>
         </NavDiv>
@@ -16,13 +29,15 @@ function WhisperDetailNavbar() {
 }
 
 const Nav = styled.nav`
-  background-color: rgba(0, 0, 0, 0, 0);
   top: 0;
   z-index: 900;
   position: fixed;
   width: 100%;
   padding: 1rem;
-  color: #283b89;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  background-color: ${({ scroll }) =>
+    scroll ? "rgba(0,0,0,0,0)" : "rgba(0,0,0,0,0)"};
+  backdrop-filter: ${({ scroll }) => (scroll ? "blur(6px)" : "blur(6px)")};
 `;
 const NavContainer = styled.div`
   max-width: 1300px;
@@ -34,6 +49,7 @@ const NavDiv = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
+  color: ${({ scroll }) => (scroll ? "white" : "#283b89")};
 `;
 const CircleDiv = styled.div`
   display: flex;

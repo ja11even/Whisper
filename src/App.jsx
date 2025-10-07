@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import { GlobalStyles } from "./Styles/GlobalStyles";
 import Feed from "./Pages/Feed";
-import Welcome from "./Pages/Welcome";
 import Circle from "./Pages/Circle";
 import Archive from "./Pages/Archive";
 import Settings from "./Pages/Settings";
@@ -13,6 +12,9 @@ import AppLayout from "./AppLayout";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import WhisperDetailPage from "./Pages/WhisperDetailPage";
 import ScrollToTop from "./Components/ScrollToTop";
+import ResetPassword from "./Pages/ResetPassword";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { persistQueryClient } from "@tanstack/react-query-persist-client";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,6 +24,17 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const localStoragePersister = createSyncStoragePersister({
+  storage: window.localStorage,
+});
+
+persistQueryClient({
+  queryClient,
+  persister: localStoragePersister,
+  maxAge: 1000 * 60 * 60 * 24,
+});
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -31,7 +44,7 @@ function App() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route
             path="/feed"
             element={

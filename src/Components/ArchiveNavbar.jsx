@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function ArchiveNavbar() {
+function ArchiveNavbar({ setSearch }) {
   const navigate = useNavigate();
   const [scroll, setScroll] = useState(false);
 
@@ -16,6 +16,7 @@ function ArchiveNavbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [setScroll]);
+
   return (
     <Nav scroll={scroll}>
       <NavContainer>
@@ -28,7 +29,11 @@ function ArchiveNavbar() {
         </NavDiv>
         <InputDiv scroll={scroll}>
           <SearchIcon size={14} />
-          <Input scroll={scroll} />
+          <Input
+            scroll={scroll}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search"
+          />
         </InputDiv>
       </NavContainer>
     </Nav>

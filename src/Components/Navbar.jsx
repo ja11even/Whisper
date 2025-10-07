@@ -1,4 +1,4 @@
-import { Archive, Settings, UserRoundPlus, UsersRound } from "lucide-react";
+import { Archive, Settings, UserRoundPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";

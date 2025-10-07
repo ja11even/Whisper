@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import WhisperDetailNavbar from "../Components/WhisperDetailNavbar";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { supabase } from "../Service/Supabase";
 import FullPageLoader from "../Components/FullPageLoader";
-import { ArrowRight, MessageCircle, SendHorizontal } from "lucide-react";
+import { SendHorizontal } from "lucide-react";
 import { useUser } from "../Hooks/useUser";
 import { useAddReplies, useFetchReplies } from "../Hooks/useReplies";
 import { useForm } from "react-hook-form";
@@ -56,7 +56,6 @@ function WhisperDetailPage() {
   const userId = user?.id;
   const reply = fetchReply?.data;
   const userName = user?.user_metadata?.userName;
-  console.log(whisper);
   function onSubmit(data) {
     if (!data.reply.trim()) return;
     const replyData = {
@@ -121,7 +120,7 @@ function WhisperDetailPage() {
                   {...register("reply")}
                 />
                 <ReplyButton type="submit">
-                  <Send size={25} color="white" />
+                  <Send size={25} color="#58d8db" />
                 </ReplyButton>
               </ReplyForm>
             </ThirdContainer>
@@ -151,9 +150,10 @@ const WhisperCard = styled.div`
   width: 100%;
   background-color: #283b89;
   height: auto;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 10px;
   margin-bottom: 5px;
+  padding-bottom: 1rem;
 `;
 const FirstContainer = styled.div`
   display: flex;
@@ -169,18 +169,9 @@ const ThirdContainer = styled.div`
   gap: 1rem;
   margin-top: 20px;
   border-top: 1px solid white;
-  padding-top: 15px;
+  padding-top: 13px;
 `;
-const ViewRepliesDiv = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-const ReplyCountDiv = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
+
 const UserImage = styled.div`
   height: 50px;
   width: 50px;
@@ -197,17 +188,7 @@ const AvatarImage = styled.img`
   border-radius: 50%;
   object-fit: cover;
 `;
-const CurrentUserImage = styled.div`
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-`;
-const CurrentUserDiv = styled.div``;
+
 const UserDiv = styled.div`
   display: flex;
   align-items: center;
@@ -229,9 +210,11 @@ const ReplyInput = styled.input`
   font-size: 1rem;
   font-family: inherit;
   padding: 0.5rem 1rem;
-  caret-color: #9ae600;
   &:focus {
     outline: none;
+  }
+  &:hover {
+    cursor: pointer;
   }
 `;
 const ReplyForm = styled.form`
@@ -253,7 +236,9 @@ const ReplyDiv = styled.div`
   margin-left: 66px;
   margin-top: -10px;
 `;
-const Reply = styled.p``;
+const Reply = styled.p`
+  color: white;
+`;
 const ReplyButton = styled.button`
   border: none;
   background: none;

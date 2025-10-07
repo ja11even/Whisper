@@ -2,8 +2,11 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { useSignUp } from "../Hooks/useSignUp";
 import SpinnerMini from "../Components/SpinnerMini";
+import { useState } from "react";
+import { Eye, EyeClosed } from "lucide-react";
 
 function SignUpForm() {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -49,22 +52,34 @@ function SignUpForm() {
         {errors.email && <Error>Email address is required</Error>}
       </EmailDiv>
       <PasswordDiv>
-        <Input
-          type="password"
-          id="password"
-          placeholder="Password"
-          {...register("password", {
-            required: true,
-            minLength: {
-              value: 8,
-              message: "At least 8 characters",
-            },
-            pattern: {
-              value: /^(?=.*[!@#$%^&*])(?=.*\d).+$/,
-              message: "Must include a number and special character",
-            },
-          })}
-        />
+        <InputWrapper>
+          <Input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            placeholder="Password"
+            {...register("password", {
+              required: true,
+              minLength: {
+                value: 8,
+                message: "At least 8 characters",
+              },
+              pattern: {
+                value: /^(?=.*[!@#$%^&*])(?=.*\d).+$/,
+                message: "Must include a number and special character",
+              },
+            })}
+          />
+          <VisibilityButton
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <Eye size={20} color="#283b89" />
+            ) : (
+              <EyeClosed size={20} color="#283b89" />
+            )}
+          </VisibilityButton>
+        </InputWrapper>
         {errors.password && (
           <Error>
             Password must be at least 8 characters, include a number and special
@@ -110,6 +125,7 @@ const Error = styled.span`
 `;
 const UserNameDiv = styled.div`
   margin-bottom: 10px;
+  margin-top: 20px;
 `;
 const EmailDiv = styled.div`
   margin-bottom: 10px;
@@ -138,6 +154,32 @@ const ButtonDiv = styled.div`
   width: 80%;
   margin: auto;
   margin-top: 30px;
+`;
+
+const VisibilityButton = styled.button`
+  height: 45px;
+  width: 45px;
+  right: 0;
+  border-radius: 5px;
+  position: absolute;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #283b89;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
 `;
 
 export default SignUpForm;

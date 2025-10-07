@@ -9,44 +9,51 @@ import google from "../assets/google.png";
 import spotify from "../assets/spotify.png";
 import SignUpForm from "../Forms/SignUpForm";
 import LogInForm from "../Forms/LogInForm";
-import { Link } from "react-router-dom";
 import Memoji4 from "../assets/Memoji4.png";
 import Memoji5 from "../assets/Memoji5.png";
-import Memoji6 from "../assets/Memoji6.png";
-import Memoji9 from "../assets/Memoji9.png";
+import ForgotPasswordForm from "../Forms/ForgotPasswordForm";
 
 function Home() {
   const [open, setOpen] = useState(false);
   const [openLogIn, setOpenLogIn] = useState(false);
+  const [openForgot, setOpenForgot] = useState(false);
   useEffect(() => {
-    const images = [Memoji1, Memoji2, Memoji3, Memoji4, google, spotify];
+    const images = [
+      Memoji1,
+      Memoji2,
+      Memoji3,
+      Memoji4,
+      Memoji5,
+      google,
+      spotify,
+    ];
     images.forEach((src) => {
       const img = new Image();
       img.src = src;
     });
   }, []);
   useEffect(() => {
-    if (open || openLogIn) {
+    if (open || openLogIn || openForgot) {
       document.body.style.overflowY = "auto";
       document.body.style.overflowX = "hidden";
     } else {
       document.body.style.overflowX = "hidden";
       document.body.style.overflowY = "hidden";
     }
-  }, [open, openLogIn]);
+  }, [open, openLogIn, openForgot]);
 
   return (
     <HomeContainer>
       <HomeWrapper>
         <AppName>Whisper</AppName>
         <PicturesDiv>
-          <ImageOneDiv animate={{ rotateY: 0 }}>
+          <ImageOneDiv>
             <ImageOne src={Memoji1} />
           </ImageOneDiv>
           <ImageTwoDiv>
             <ImageOne src={Memoji5} />
           </ImageTwoDiv>
-          <ImageThreeDiv animate={{ rotateY: 0 }}>
+          <ImageThreeDiv>
             <ImageOne src={Memoji4} />
           </ImageThreeDiv>
         </PicturesDiv>
@@ -59,21 +66,11 @@ function Home() {
         </BodyHeader>
         {open ? (
           <SignUpContainer
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <Heading as="h2">Get Started</Heading>
-            <OAuthButtons>
-              <GoogleButton>
-                <OAuthImage src={google} />
-                Google
-              </GoogleButton>
-              <SpotifyButton>
-                <OAuthImage src={spotify} />
-                Spotify
-              </SpotifyButton>
-            </OAuthButtons>
             <SignUpForm />
             <FooterText>
               Already have an account ?
@@ -91,35 +88,46 @@ function Home() {
           </SignUpContainer>
         ) : openLogIn ? (
           <LogInContainer
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <Heading as="h2">Log In</Heading>
-            <OAuthButtons>
-              <GoogleButton>
-                <OAuthImage src={google} />
-                Google
-              </GoogleButton>
-              <SpotifyButton>
-                <OAuthImage src={spotify} />
-                Spotify
-              </SpotifyButton>
-            </OAuthButtons>
             <LogInForm />
             <FooterText>
-              Don't have an account ?{" "}
+              Forgot password ?{" "}
               <span
                 onClick={() => {
                   setOpenLogIn(false);
-                  setOpen(true);
+                  setOpenForgot(true);
                 }}
                 style={{ color: "#283b89", cursor: "pointer" }}
               >
-                Get Started
+                Reset password
               </span>
             </FooterText>
           </LogInContainer>
+        ) : openForgot ? (
+          <ForgotContainer
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <Heading as="h2">Forgot Password</Heading>
+            <ForgotPasswordForm />
+            <FooterText>
+              Remember password ?{" "}
+              <span
+                onClick={() => {
+                  setOpenForgot(false);
+                  setOpenLogIn(true);
+                }}
+                style={{ color: "#283b89", cursor: "pointer" }}
+              >
+                Log In
+              </span>
+            </FooterText>
+          </ForgotContainer>
         ) : (
           <Buttons>
             <GetStartedButton onClick={() => setOpen(true)}>
@@ -266,7 +274,7 @@ const ExistingAccountButton = styled.button`
 `;
 const SignUpContainer = styled(motion.div)`
   background-color: white;
-  min-height: 400px;
+  min-height: 380px;
   max-height: 510px;
   width: 650px;
   margin: auto;
@@ -280,7 +288,7 @@ const SignUpContainer = styled(motion.div)`
 `;
 const LogInContainer = styled(motion.div)`
   background-color: white;
-  min-height: 380px;
+  min-height: 330px;
   max-height: 510px;
   width: 650px;
   margin: auto;
@@ -292,41 +300,21 @@ const LogInContainer = styled(motion.div)`
     padding: 1.5rem;
   }
 `;
-const OAuthButtons = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 10px;
-  margin-bottom: 25px;
-`;
-const GoogleButton = styled.button`
-  border: none;
-  padding: 0.8rem 2rem;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
+const ForgotContainer = styled(motion.div)`
+  background-color: white;
+  min-height: 240px;
+  max-height: 300px;
+  width: 650px;
+  margin: auto;
   border-radius: 10px;
-  width: 50%;
-  font-family: inherit;
+  padding: 2rem;
+  margin-top: 50px;
+  @media (max-width: 700px) {
+    width: 350px;
+    padding: 1.5rem;
+  }
 `;
-const SpotifyButton = styled.button`
-  border: none;
-  padding: 0.8rem 2rem;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  border-radius: 10px;
-  width: 50%;
-  font-family: inherit;
-`;
-const OAuthImage = styled.img`
-  width: 25px;
-  height: 25px;
-  object-fit: cover;
-`;
+
 const FooterText = styled.p`
   font-size: 1rem;
   text-align: center;

@@ -4,8 +4,7 @@ export async function fetchLikes(whisperId, userId) {
   const { data, error } = await supabase
     .from("Likes")
     .select("*")
-    .eq("whisper_id", whisperId)
-    .eq("user_id", userId);
+    .eq("whisper_id", whisperId);
   if (error) throw new Error(error.message);
 
   const count = data.length;

@@ -1,20 +1,26 @@
 import styled from "styled-components";
 import CircleNavbar from "../Components/CircleNavbar";
-import { Plus, UserRoundPlus } from "lucide-react";
-import { Heading } from "../Components/Heading";
+import { UserRoundPlus } from "lucide-react";
 import { useAddCircle } from "../Hooks/useCircle";
 import { useForm } from "react-hook-form";
 import { useUser } from "../Hooks/useUser";
+import toast from "react-hot-toast";
+import SpinnerMini from "../Components/SpinnerMini";
+import FullPageLoader from "../Components/FullPageLoader";
 
 function Circle() {
   const { user, isLoadingUser } = useUser();
   const addCircle = useAddCircle();
   const { handleSubmit, reset, register } = useForm();
-  if (isLoadingUser) return <p>loading..</p>;
+  if (isLoadingUser) return <FullPageLoader />;
   const userId = user?.id;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   async function onSubmit(data) {
     if (!data.invited_email?.trim()) return;
     if (data.invited_email === user?.email) return;
+    if (emailRegex.test(data.invited_email) === false) {
+      toast.error("Enter a valid email address");
+    }
     const circleData = { ...data, inviter_user_id: userId };
     addCircle.mutate(circleData, {
       onSuccess: () => {
@@ -36,8 +42,14 @@ function Circle() {
             <Form onSubmit={handleSubmit(onSubmit)}>
               <EmailDiv>
                 <Input type="email" {...register("invited_email")} />
-                <InviteButton type="submit">
-                  <UserRoundPlus size={18} /> Add
+                <InviteButton type="submit" disabled={addCircle.isPending}>
+                  {addCircle.isPending ? (
+                    <SpinnerMini width="1.3rem" height="1.3rem" color="white" />
+                  ) : (
+                    <>
+                      <UserRoundPlus size={18} /> Add
+                    </>
+                  )}
                 </InviteButton>
               </EmailDiv>
             </Form>
@@ -117,19 +129,25 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+  @media (max-width: 700px) {
+    width: fit-content;
+  }
 `;
 const Form = styled.form``;
 const InviteButton = styled.button`
   background-color: #11192d;
   color: white;
-  padding: 0.6rem 1.5rem;
+  padding: 0.51rem 1.5rem;
   border-radius: 5px;
   display: flex;
   align-items: center;
   border: none;
+  justify-content: center;
   font-family: inherit;
   font-size: 1rem;
   gap: 0.5rem;
+  width: 110px;
+  height: 35px;
   &:hover {
     cursor: pointer;
   }

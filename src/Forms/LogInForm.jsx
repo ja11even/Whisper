@@ -2,10 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useLogIn } from "../Hooks/useLogIn";
 import SpinnerMini from "../Components/SpinnerMini";
+import { Eye, EyeClosed } from "lucide-react";
 
 function LogInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const logIn = useLogIn();
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,13 +26,25 @@ function LogInForm() {
         />
       </EmailDiv>
       <PasswordDiv>
-        <Input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter Password"
-        />
+        <InputWrapper>
+          <Input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter Password"
+          />
+          <VisibilityButton
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <Eye size={20} color="#283b89" />
+            ) : (
+              <EyeClosed size={20} color="#283b89" />
+            )}
+          </VisibilityButton>
+        </InputWrapper>
       </PasswordDiv>
       <ButtonDiv>
         <Button type="submit">
@@ -67,6 +81,7 @@ const Input = styled.input`
 
 const EmailDiv = styled.div`
   margin-bottom: 10px;
+  margin-top: 20px;
 `;
 const PasswordDiv = styled.div`
   margin-bottom: 10px;
@@ -93,5 +108,29 @@ const ButtonDiv = styled.div`
   margin: auto;
   margin-top: 30px;
 `;
+const VisibilityButton = styled.button`
+  height: 45px;
+  width: 45px;
+  right: 0;
+  border-radius: 5px;
+  position: absolute;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #283b89;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
 
+const InputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
 export default LogInForm;
