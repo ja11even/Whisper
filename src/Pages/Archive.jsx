@@ -3,7 +3,7 @@ import ArchiveNavbar from "../Components/ArchiveNavbar";
 import { CircleAlert } from "lucide-react";
 import { useUser } from "../Hooks/useUser";
 import { useFetchWhisper } from "../Hooks/useWhispers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FullPageLoader from "../Components/FullPageLoader";
 import WhisperCard from "../Components/WhisperCard";
 import Illustration from "../Components/Illustration";
@@ -12,9 +12,21 @@ function Archive() {
   const { user, isLoadingUser } = useUser();
   const fetchWhisper = useFetchWhisper();
   const [search, setSearch] = useState("");
+  const whispers = fetchWhisper?.data;
+
+  useEffect(() => {
+    if (whispers.length === 0) {
+      document.body.style.overflowX = "hidden";
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [whispers.length]);
 
   if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
-  const whispers = fetchWhisper?.data;
 
   const archivewhispers = whispers?.filter((w) => {
     const now = new Date();

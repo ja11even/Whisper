@@ -4,12 +4,12 @@ export const Heading = styled.h1`
   ${(props) =>
     props.as === "h1" &&
     css`
-      font-size: 2rem;
+      font-size: 1.9rem;
       font-weight: 400;
       color: white;
       @media (max-width: 700px) {
         text-align: center;
-        width: 360px;
+        width: 340px;
       }
     `}
   ${(props) =>

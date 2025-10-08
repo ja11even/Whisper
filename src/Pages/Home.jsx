@@ -40,6 +40,9 @@ function Home() {
       document.body.style.overflowX = "hidden";
       document.body.style.overflowY = "hidden";
     }
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
   }, [open, openLogIn, openForgot]);
 
   return (

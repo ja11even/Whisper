@@ -16,6 +16,7 @@ function Feed() {
   const { handleSubmit, reset, register } = useForm();
   const fetchWhisper = useFetchWhisper();
   const addWhisper = useAddWhisper();
+  const whispers = fetchWhisper?.data;
 
   useEffect(() => {
     const img = new Image();
@@ -30,11 +31,13 @@ function Feed() {
     } else {
       document.body.style.overflowY = "auto";
     }
-  });
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [open, whispers?.length, fetchWhisper.isLoading]);
 
   if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
 
-  const whispers = fetchWhisper?.data;
   const userId = user?.id;
 
   function onSubmit(data) {
@@ -141,9 +144,9 @@ function Feed() {
 const PostForm = styled.form``;
 
 const FeedContainer = styled.div`
+  background-color: #58d8db;
   min-height: 100vh;
   padding: 2rem 0;
-  background-color: #58d8db;
 `;
 const FeedWrapper = styled.div`
   max-width: 1000px;

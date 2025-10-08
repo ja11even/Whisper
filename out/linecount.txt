@@ -1,0 +1,92 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2025-10-07 18:02:55
+count workspace : /Users/mac/Desktop/whisper
+total files : 80
+total code lines : 7300
+total comment lines : 71
+total blank lines : 279
+
+.env, code is 3, comment is 1, blank is 0.
+.gitignore, code is 14, comment is 12, blank is 2.
+dist/assets/archive-6nzeTIzj.svg, code is 1, comment is 0, blank is 0.
+dist/assets/google-Vxclqtie.png, it is a binary file.
+dist/assets/illustration-Buh9xpIy.svg, code is 1, comment is 0, blank is 0.
+dist/assets/index-DD2fUDrp.js, code is 915, comment is 54, blank is 5.
+dist/assets/logo-BQqTrRyf.jpg, it is a binary file.
+dist/assets/Memoji1-DF57SEPy.png, it is a binary file.
+dist/assets/Memoji2-CsCoH5hy.png, it is a binary file.
+dist/assets/Memoji3-Br7ucEQO.png, it is a binary file.
+dist/assets/Memoji4-BLDjETMc.png, it is a binary file.
+dist/assets/Memoji5-CpQvkVRs.png, it is a binary file.
+dist/assets/Memoji6-CxBdh_aL.png, it is a binary file.
+dist/assets/Memoji9-BqGQG4Ga.png, it is a binary file.
+dist/assets/spotify-B72KBsTY.png, it is a binary file.
+dist/index.html, code is 17, comment is 0, blank is 0.
+dist/vite.svg, code is 1, comment is 0, blank is 0.
+eslint.config.js, code is 28, comment is 0, blank is 1.
+index.html, code is 17, comment is 0, blank is 0.
+package-lock.json, code is 3334, comment is 0, blank is 94.
+package.json, code is 41, comment is 0, blank is 0.
+public/vite.svg, code is 1, comment is 0, blank is 0.
+README.md, code is 7, comment is 3, blank is 5.
+src/App.jsx, code is 111, comment is 0, blank is 5.
+src/AppLayout.jsx, code is 5, comment is 0, blank is 2.
+src/assets/archive.svg, code is 1, comment is 0, blank is 0.
+src/assets/google.png, it is a binary file.
+src/assets/illustration.svg, code is 1, comment is 0, blank is 0.
+src/assets/logo.jpg, it is a binary file.
+src/assets/Memoji1.png, it is a binary file.
+src/assets/Memoji2.png, it is a binary file.
+src/assets/Memoji3.png, it is a binary file.
+src/assets/Memoji4.png, it is a binary file.
+src/assets/Memoji5.png, it is a binary file.
+src/assets/Memoji6.png, it is a binary file.
+src/assets/Memoji9.png, it is a binary file.
+src/assets/spotify.png, it is a binary file.
+src/assets/whisperlogo.PNG, it is a binary file.
+src/Components/ArchiveNavbar.jsx, code is 101, comment is 0, blank is 5.
+src/Components/CircleNavbar.jsx, code is 65, comment is 0, blank is 4.
+src/Components/FullPageLoader.jsx, code is 38, comment is 0, blank is 2.
+src/Components/Heading.jsx, code is 48, comment is 0, blank is 1.
+src/Components/Illustration.jsx, code is 75, comment is 0, blank is 3.
+src/Components/Navbar.jsx, code is 73, comment is 0, blank is 3.
+src/Components/ProtectedRoute.jsx, code is 18, comment is 0, blank is 3.
+src/Components/ScrollToTop.jsx, code is 9, comment is 0, blank is 1.
+src/Components/SettingsNavbar.jsx, code is 68, comment is 0, blank is 3.
+src/Components/SpinnerMini.jsx, code is 15, comment is 0, blank is 3.
+src/Components/TimeAgo.jsx, code is 34, comment is 0, blank is 5.
+src/Components/WhisperCard.jsx, code is 139, comment is 0, blank is 2.
+src/Components/WhisperDetailNavbar.jsx, code is 60, comment is 0, blank is 4.
+src/Forms/ForgotPasswordForm.jsx, code is 89, comment is 0, blank is 6.
+src/Forms/LogInForm.jsx, code is 131, comment is 0, blank is 5.
+src/Forms/ResetPasswordForm.jsx, code is 176, comment is 0, blank is 10.
+src/Forms/SignUpForm.jsx, code is 179, comment is 0, blank is 6.
+src/Hooks/useCircle.js, code is 43, comment is 0, blank is 3.
+src/Hooks/useLikes.js, code is 26, comment is 0, blank is 3.
+src/Hooks/useLogIn.js, code is 22, comment is 0, blank is 1.
+src/Hooks/useLogOut.js, code is 14, comment is 0, blank is 1.
+src/Hooks/useReplies.js, code is 63, comment is 0, blank is 5.
+src/Hooks/useSignUp.js, code is 12, comment is 0, blank is 2.
+src/Hooks/useUser.js, code is 19, comment is 0, blank is 1.
+src/Hooks/useWhispers.js, code is 63, comment is 0, blank is 4.
+src/main.jsx, code is 11, comment is 0, blank is 1.
+src/Pages/Archive.jsx, code is 84, comment is 0, blank is 6.
+src/Pages/Circle.jsx, code is 67, comment is 0, blank is 2.
+src/Pages/Feed.jsx, code is 258, comment is 0, blank is 10.
+src/Pages/Home.jsx, code is 59, comment is 0, blank is 2.
+src/Pages/ResetPassword.jsx, code is 25, comment is 0, blank is 1.
+src/Pages/Settings.jsx, code is 251, comment is 0, blank is 8.
+src/Pages/WhisperDetailPage.jsx, code is 236, comment is 0, blank is 15.
+src/Service/apiAuth.js, code is 51, comment is 0, blank is 4.
+src/Service/apiCircle.js, code is 22, comment is 0, blank is 3.
+src/Service/apiLikes.js, code is 25, comment is 0, blank is 5.
+src/Service/apiReplies.js, code is 40, comment is 0, blank is 4.
+src/Service/apiWhispers.js, code is 52, comment is 0, blank is 11.
+src/Service/Supabase.jsx, code is 4, comment is 0, blank is 2.
+src/Styles/GlobalStyles.js, code is 29, comment is 0, blank is 4.
+vercel.json, code is 3, comment is 0, blank is 0.
+vite.config.js, code is 5, comment is 1, blank is 1.
+===============================================================================

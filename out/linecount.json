@@ -1,0 +1,518 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "/Users/mac/Desktop/whisper",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2025-10-07 18:02:55",
+            "filesum": 80,
+            "codesum": 7300,
+            "commentsum": 71,
+            "blanksum": 279,
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": ".env"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 12,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "dist/assets/archive-6nzeTIzj.svg"
+                },
+                {
+                    "filename": "dist/assets/google-Vxclqtie.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "dist/assets/illustration-Buh9xpIy.svg"
+                },
+                {
+                    "blank": 5,
+                    "code": 915,
+                    "comment": 54,
+                    "filename": "dist/assets/index-DD2fUDrp.js"
+                },
+                {
+                    "filename": "dist/assets/logo-BQqTrRyf.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dist/assets/Memoji1-DF57SEPy.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dist/assets/Memoji2-CsCoH5hy.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dist/assets/Memoji3-Br7ucEQO.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dist/assets/Memoji4-BLDjETMc.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dist/assets/Memoji5-CpQvkVRs.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dist/assets/Memoji6-CxBdh_aL.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dist/assets/Memoji9-BqGQG4Ga.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dist/assets/spotify-B72KBsTY.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "dist/index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "dist/vite.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "eslint.config.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "index.html"
+                },
+                {
+                    "blank": 94,
+                    "code": 3334,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "public/vite.svg"
+                },
+                {
+                    "blank": 5,
+                    "code": 7,
+                    "comment": 3,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 5,
+                    "code": 111,
+                    "comment": 0,
+                    "filename": "src/App.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src/AppLayout.jsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src/assets/archive.svg"
+                },
+                {
+                    "filename": "src/assets/google.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src/assets/illustration.svg"
+                },
+                {
+                    "filename": "src/assets/logo.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/Memoji1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/Memoji2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/Memoji3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/Memoji4.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/Memoji5.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/Memoji6.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/Memoji9.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/spotify.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/assets/whisperlogo.PNG",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 101,
+                    "comment": 0,
+                    "filename": "src/Components/ArchiveNavbar.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 65,
+                    "comment": 0,
+                    "filename": "src/Components/CircleNavbar.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "src/Components/FullPageLoader.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src/Components/Heading.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 75,
+                    "comment": 0,
+                    "filename": "src/Components/Illustration.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "src/Components/Navbar.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src/Components/ProtectedRoute.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src/Components/ScrollToTop.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "src/Components/SettingsNavbar.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src/Components/SpinnerMini.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/Components/TimeAgo.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 139,
+                    "comment": 0,
+                    "filename": "src/Components/WhisperCard.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "src/Components/WhisperDetailNavbar.jsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 89,
+                    "comment": 0,
+                    "filename": "src/Forms/ForgotPasswordForm.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 131,
+                    "comment": 0,
+                    "filename": "src/Forms/LogInForm.jsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 176,
+                    "comment": 0,
+                    "filename": "src/Forms/ResetPasswordForm.jsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 179,
+                    "comment": 0,
+                    "filename": "src/Forms/SignUpForm.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "src/Hooks/useCircle.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src/Hooks/useLikes.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/Hooks/useLogIn.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src/Hooks/useLogOut.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "src/Hooks/useReplies.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/Hooks/useSignUp.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "src/Hooks/useUser.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "src/Hooks/useWhispers.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/main.jsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "src/Pages/Archive.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "src/Pages/Circle.jsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 258,
+                    "comment": 0,
+                    "filename": "src/Pages/Feed.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "src/Pages/Home.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src/Pages/ResetPassword.jsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 251,
+                    "comment": 0,
+                    "filename": "src/Pages/Settings.jsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 236,
+                    "comment": 0,
+                    "filename": "src/Pages/WhisperDetailPage.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "src/Service/apiAuth.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/Service/apiCircle.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src/Service/apiLikes.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/Service/apiReplies.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "src/Service/apiWhispers.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/Service/Supabase.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/Styles/GlobalStyles.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "vercel.json"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 1,
+                    "filename": "vite.config.js"
+                }
+            ]
+        }
+    ]
+}
