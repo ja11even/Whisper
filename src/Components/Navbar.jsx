@@ -46,11 +46,16 @@ const Nav = styled.nav`
   z-index: 900;
   position: fixed;
   width: 100%;
-  padding: 1rem;
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
   background-color: ${({ scroll }) =>
     scroll ? "rgba(0,0,0,0,0)" : "rgba(0,0,0,0,0)"};
   backdrop-filter: ${({ scroll }) => (scroll ? "blur(6px)" : "blur(6px)")};
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-top: max(1rem, constant(safe-area-inset-top));
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-left: max(1rem, constant(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-right: max(1rem, constant(safe-area-inset-right));
 `;
 const NavContainer = styled.div`
   max-width: 1300px;

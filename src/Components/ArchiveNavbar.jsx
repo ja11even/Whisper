@@ -46,7 +46,12 @@ const Nav = styled.nav`
   position: fixed;
   width: 100%;
   height: 59px;
-  padding: 1rem;
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-top: max(1rem, constant(safe-area-inset-top));
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-left: max(1rem, constant(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-right: max(1rem, constant(safe-area-inset-right));
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
   background-color: ${({ scroll }) =>
     scroll ? "rgba(0,0,0,0,0)" : "rgba(0,0,0,0,0)"};

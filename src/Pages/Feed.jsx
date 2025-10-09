@@ -274,6 +274,9 @@ const Illustration = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 1400px) {
+    margin-top: 150px;
+  }
   @media (max-width: 700px) {
     height: 450px;
   }

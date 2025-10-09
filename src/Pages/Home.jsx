@@ -168,7 +168,7 @@ const HomeWrapper = styled.div`
     margin-top: 150px;
   }
   @media (max-width: 700px) {
-    margin-top: 15px;
+    margin-top: 10px;
     max-width: 90%;
   }
 `;
