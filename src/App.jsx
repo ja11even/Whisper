@@ -45,7 +45,7 @@ function App() {
     } else if (
       location.pathname === "/feed" ||
       location.pathname === "/circle" ||
-      location.pathname === "archive" ||
+      location.pathname === "/archive" ||
       location.pathname === "/settings" ||
       location.pathname === "/whisper/:whisperId"
     ) {
