@@ -165,7 +165,7 @@ const HomeWrapper = styled.div`
   margin-top: 60px;
   @media (max-width: 1400px) {
     max-width: 700px;
-    margin-top: 100px;
+    margin-top: 150px;
   }
   @media (max-width: 700px) {
     margin-top: 15px;
