@@ -20,11 +20,13 @@ body{
     font-family: "Neutral Sans";
     overflow-x:hidden;
     background-color: #58d8db;
+    height: 100%;
 }
 
 html{
     scrollbar-width: none;
     -ms-overflow-style: none;
+    height: 100%;
 }
 
 body::-webkit-scrollbar{
