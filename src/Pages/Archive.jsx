@@ -17,7 +17,7 @@ function Archive() {
     const now = new Date();
     const date = new Date(w?.created_at);
     const seconds = Math.floor((now - date) / 1000);
-    return w.created_at && seconds >= 604800;
+    return w.created_at && seconds <= 604800;
   });
 
   useEffect(() => {

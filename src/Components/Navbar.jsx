@@ -50,12 +50,7 @@ const Nav = styled.nav`
   background-color: ${({ scroll }) =>
     scroll ? "rgba(0,0,0,0,0)" : "rgba(0,0,0,0,0)"};
   backdrop-filter: ${({ scroll }) => (scroll ? "blur(6px)" : "blur(6px)")};
-  padding-top: max(1rem, env(safe-area-inset-top));
-  padding-top: max(1rem, constant(safe-area-inset-top));
-  padding-left: max(1rem, env(safe-area-inset-left));
-  padding-left: max(1rem, constant(safe-area-inset-left));
-  padding-right: max(1rem, env(safe-area-inset-right));
-  padding-right: max(1rem, constant(safe-area-inset-right));
+  padding: 1rem;
 `;
 const NavContainer = styled.div`
   max-width: 1300px;

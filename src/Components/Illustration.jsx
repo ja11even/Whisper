@@ -69,10 +69,11 @@ const IllustrationContainer = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 1400px) {
-    margin-top: 150px;
+    margin-top: 170px;
   }
   @media (max-width: 700px) {
     height: 450px;
+    margin-top: 0px;
   }
 `;
 const IllustrationText = styled(motion.p)`

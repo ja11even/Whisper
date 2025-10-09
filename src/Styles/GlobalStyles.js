@@ -19,6 +19,7 @@ body{
     line-height: 1.6;
     font-family: "Neutral Sans";
     overflow-x:hidden;
+    background-color: #58d8db;
 }
 
 html{
