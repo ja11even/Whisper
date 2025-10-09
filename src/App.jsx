@@ -40,9 +40,15 @@ function App() {
   const location = useLocation();
   useEffect(() => {
     document.body.className = "";
-    if (location.pathname === "/") {
+    if (location.pathname === "/" || location.pathname === "/reset-password") {
       document.body.classList.add("home-bg");
-    } else if (location.pathname === "/feed") {
+    } else if (
+      location.pathname === "/feed" ||
+      location.pathname === "/circle" ||
+      location.pathname === "archive" ||
+      location.pathname === "/settings" ||
+      location.pathname === "/whisper/:whisperId"
+    ) {
       document.body.classList.add("feed-bg");
     }
   }, [location.pathname]);

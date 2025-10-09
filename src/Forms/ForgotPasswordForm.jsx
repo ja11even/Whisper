@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { supabase } from "../Service/Supabase";
 import toast from "react-hot-toast";
+import SpinnerMini from "../Components/SpinnerMini";
 
 function ForgotPasswordForm() {
   const [email, setEmail] = useState("");

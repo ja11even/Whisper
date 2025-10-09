@@ -37,5 +37,4 @@ body.home-bg{
 body.feed-bg{
     background-color: #58d8db;
 }
-
 `;
