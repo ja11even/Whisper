@@ -12,7 +12,7 @@ function ForgotPasswordForm() {
     if (!email) return;
     setSubmitting(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://petmuse.vercel.app/reset-password",
+      redirectTo: "https://whisper-11.vercel.app/reset-password",
     });
     if (error) {
       toast.error(error.message);

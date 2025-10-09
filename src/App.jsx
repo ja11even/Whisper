@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Pages/Home";
 import { GlobalStyles } from "./Styles/GlobalStyles";
 import Feed from "./Pages/Feed";
@@ -15,6 +15,7 @@ import ScrollToTop from "./Components/ScrollToTop";
 import ResetPassword from "./Pages/ResetPassword";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { persistQueryClient } from "@tanstack/react-query-persist-client";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,15 @@ persistQueryClient({
 });
 
 function App() {
+  const location = useLocation();
+  useEffect(() => {
+    document.body.className = "";
+    if (location.pathname === "/") {
+      document.body.classList.add("home-bg");
+    } else if (location.pathname === "/feed") {
+      document.body.classList.add("feed-bg");
+    }
+  }, [location.pathname]);
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyles />

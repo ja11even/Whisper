@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+
 *{
     margin: 0;
     padding: 0;
@@ -19,18 +20,22 @@ body{
     line-height: 1.6;
     font-family: "Neutral Sans";
     overflow-x:hidden;
-    background-color: #58d8db;
-    height: 100%;
 }
 
 html{
     scrollbar-width: none;
     -ms-overflow-style: none;
-    height: 100%;
 }
 
 body::-webkit-scrollbar{
     display: none;
+}
+
+body.home-bg{
+    background-color: #283b89;
+}
+body.feed-bg{
+    background-color: #58d8db;
 }
 
 `;
