@@ -147,7 +147,7 @@ function Home() {
 }
 
 const HomeContainer = styled.div`
-  background-color: #283b89;
+  background-color: #283b89 !important;
   min-height: 100svh;
   padding-top: max(2rem, env(safe-area-inset-top));
   padding-top: max(2rem, constant(safe-area-inset-top));

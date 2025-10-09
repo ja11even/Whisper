@@ -105,8 +105,12 @@ const ResultDiv = styled.div`
   width: 50%;
   margin: auto;
   margin-top: 250px;
+  @media (max-width: 1400px) {
+    margin-top: 350px;
+  }
   @media (max-width: 700px) {
     width: 70%;
+    margin-top: 250px;
   }
 `;
 export default Archive;
