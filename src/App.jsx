@@ -47,7 +47,7 @@ function App() {
       location.pathname === "/circle" ||
       location.pathname === "/archive" ||
       location.pathname === "/settings" ||
-      location.pathname === "/whisper/:whisperId"
+      location.pathname.startsWith("/whisper/")
     ) {
       document.body.classList.add("feed-bg");
     }
