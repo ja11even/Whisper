@@ -91,6 +91,9 @@ const Input = styled.input`
   &:hover {
     cursor: pointer;
   }
+  @media (max-width: 700px) {
+    width: 150px;
+  }
 `;
 const SearchIcon = styled(Search)`
   position: absolute;

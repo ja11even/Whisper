@@ -13,9 +13,15 @@ function Archive() {
   const fetchWhisper = useFetchWhisper();
   const [search, setSearch] = useState("");
   const whispers = fetchWhisper?.data;
+  const archivewhispers = whispers?.filter((w) => {
+    const now = new Date();
+    const date = new Date(w?.created_at);
+    const seconds = Math.floor((now - date) / 1000);
+    return w.created_at && seconds >= 604800;
+  });
 
   useEffect(() => {
-    if (whispers.length === 0) {
+    if (archivewhispers?.length === 0) {
       document.body.style.overflowX = "hidden";
       document.body.style.overflowY = "hidden";
     } else {
@@ -24,16 +30,10 @@ function Archive() {
     return () => {
       document.body.style.overflowY = "auto";
     };
-  }, [whispers.length]);
+  }, [archivewhispers?.length]);
 
   if (isLoadingUser || fetchWhisper.isLoading) return <FullPageLoader />;
 
-  const archivewhispers = whispers?.filter((w) => {
-    const now = new Date();
-    const date = new Date(w?.created_at);
-    const seconds = Math.floor((now - date) / 1000);
-    return w.created_at && seconds >= 604800;
-  });
   const searchWhispers = archivewhispers?.filter(
     (w) =>
       w.whisper.toLowerCase().includes(search.toLowerCase()) ||
@@ -58,11 +58,13 @@ function Archive() {
             );
           })}
           {archivewhispers.length === 0 && <Illustration />}
-          {search && searchWhispers.length === 0 && (
-            <ResultDiv>
-              <CircleAlert size={21} /> No results found
-            </ResultDiv>
-          )}
+          {search &&
+            searchWhispers.length === 0 &&
+            archivewhispers.length !== 0 && (
+              <ResultDiv>
+                <CircleAlert size={21} /> No results found
+              </ResultDiv>
+            )}
         </ArchiveWrapper>
       </ArchiveContainer>
     </>
@@ -70,16 +72,24 @@ function Archive() {
 }
 
 const ArchiveContainer = styled.div`
-  min-height: 100vh;
-  padding: 2rem 0;
+  min-height: 100svh;
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-top: max(2rem, constant(safe-area-inset-top));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  padding-bottom: max(2rem, constant(safe-area-inset-bottom));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   background-color: #58d8db;
 `;
 const ArchiveWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
   margin-top: 70px;
+  @media (max-width: 1400px) {
+    max-width: 90%;
+  }
   @media (max-width: 700px) {
-    max-width: 370px;
+    max-width: 95%;
   }
 `;
 const ResultDiv = styled.div`
@@ -94,7 +104,7 @@ const ResultDiv = styled.div`
   gap: 1rem;
   width: 50%;
   margin: auto;
-  margin-top: 270px;
+  margin-top: 250px;
   @media (max-width: 700px) {
     width: 70%;
   }

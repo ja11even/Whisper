@@ -53,9 +53,11 @@ function Illustration() {
 }
 
 const IllustrationImage = styled.img`
-  width: 1000px;
-  height: 490px;
+  max-width: 600px;
+  height: auto;
   margin-bottom: 20px;
+  object-fit: contain;
+  width: 90%;
   @media (max-width: 700px) {
     width: 100%;
     height: 100%;

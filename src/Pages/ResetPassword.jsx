@@ -44,15 +44,28 @@ function ResetPassword() {
 
 const HomeContainer = styled.div`
   background-color: #283b89;
-  min-height: 100vh;
-  padding: 2rem 0;
+  min-height: 100svh;
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-top: max(2rem, constant(safe-area-inset-top));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  padding-bottom: max(2rem, constant(safe-area-inset-bottom));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  @media (min-width: 1001px) {
+    padding: 2rem 0;
+  }
 `;
 const HomeWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
   margin-top: 60px;
+  @media (max-width: 1000px) {
+    max-width: 700px;
+    margin-top: 100px;
+  }
   @media (max-width: 700px) {
     margin-top: 15px;
+    max-width: 90%;
   }
 `;
 const AppName = styled.p`
@@ -60,6 +73,9 @@ const AppName = styled.p`
   font-size: 2rem;
   color: white;
   margin-top: -20px;
+  @media (max-width: 700px) {
+    margin-top: 0px;
+  }
 `;
 const PicturesDiv = styled.div`
   display: flex;
@@ -69,8 +85,11 @@ const PicturesDiv = styled.div`
   margin-bottom: 20px;
   max-width: 100%;
   gap: 5rem;
+  @media (max-width: 1000px) {
+    gap: 3rem;
+  }
   @media (max-width: 700px) {
-    gap: 1.2rem;
+    gap: 1.5rem;
   }
 `;
 const ImageOneDiv = styled(motion.div)`
@@ -124,8 +143,12 @@ const BodyText = styled.p`
   width: 700px;
   font-size: 1.1rem;
   color: #11192d;
+  @media (max-width: 1000px) {
+    width: 80%;
+  }
   @media (max-width: 700px) {
-    width: 320px;
+    width: 85%;
+    max-width: 350px;
     margin-top: 10px;
   }
 `;
@@ -138,8 +161,11 @@ const ForgotContainer = styled(motion.div)`
   border-radius: 10px;
   padding: 2rem;
   margin-top: 50px;
+  @media (max-width: 1000px) {
+    width: 80%;
+  }
   @media (max-width: 700px) {
-    width: 350px;
+    width: 100%;
     padding: 1.5rem;
   }
 `;

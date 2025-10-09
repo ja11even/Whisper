@@ -8,7 +8,6 @@ import { ChevronRight, Heart } from "lucide-react";
 function WhisperCard({ whisperId, userId, whisper }) {
   const { liked, count, toggleLike } = useLikes(whisperId, userId);
   const avatar = whisper?.profile?.avatar_url;
-  console.log(count);
   return (
     <>
       <WhisperCardContainer>

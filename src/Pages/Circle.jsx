@@ -77,16 +77,24 @@ function Circle() {
   );
 }
 const CircleContainer = styled.div`
-  min-height: 100vh;
-  padding: 2rem 0;
+  min-height: 100svh;
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  padding-bottom: max(2rem, constant(safe-area-inset-bottom));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   background-color: #58d8db;
 `;
 const CircleWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
   margin-top: 70px;
+  @media (max-width: 1400px) {
+    max-width: 90%;
+  }
   @media (max-width: 700px) {
-    max-width: 370px;
+    max-width: 95%;
   }
 `;
 const InviteCard = styled.div`
@@ -111,12 +119,13 @@ const EmailDiv = styled.div`
   justify-content: space-between;
   gap: 2rem;
   margin-top: 10px;
+  width: 100%;
   @media (max-width: 700px) {
     gap: 1rem;
   }
 `;
 const Input = styled.input`
-  width: 100%;
+  width: 90%;
   height: 35px;
   border: none;
   border-radius: 5px;
@@ -129,15 +138,18 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+  @media (max-width: 1400px) {
+    width: 90%;
+  }
   @media (max-width: 700px) {
-    width: fit-content;
+    width: 75%;
   }
 `;
 const Form = styled.form``;
 const InviteButton = styled.button`
   background-color: #11192d;
   color: white;
-  padding: 0.51rem 1.5rem;
+  padding: 0.51rem 0;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -146,10 +158,16 @@ const InviteButton = styled.button`
   font-family: inherit;
   font-size: 1rem;
   gap: 0.5rem;
-  width: 110px;
+  width: 10%;
   height: 35px;
   &:hover {
     cursor: pointer;
+  }
+  @media (max-width: 1400px) {
+    width: 15%;
+  }
+  @media (max-width: 700px) {
+    width: 30%;
   }
 `;
 

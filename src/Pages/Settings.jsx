@@ -11,6 +11,7 @@ import { supabase } from "../Service/Supabase";
 import FullPageLoader from "../Components/FullPageLoader";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 function Settings() {
   const { user, isLoadingUser } = useUser();
@@ -21,6 +22,7 @@ function Settings() {
   const [userName, setUserName] = useState(user?.user_metadata?.userName || "");
   const currentUserName = user?.user_metadata?.userName;
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   if (isLoadingUser) return <FullPageLoader />;
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -68,6 +70,7 @@ function Settings() {
           .eq("id", user?.id);
       }
       toast.success("Profile updated");
+      queryClient.invalidateQueries(["user"]);
       navigate("/feed");
     } catch (err) {
       console.log(err.message);
@@ -137,16 +140,24 @@ function Settings() {
 }
 
 const SettingsContainer = styled.div`
-  min-height: 100vh;
-  padding: 2rem 0;
+  min-height: 100svh;
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  padding-bottom: max(2rem, constant(safe-area-inset-bottom));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   background-color: #58d8db;
 `;
 const SettingsWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
   margin-top: 70px;
+  @media (max-width: 1400px) {
+    max-width: 90%;
+  }
   @media (max-width: 700px) {
-    max-width: 370px;
+    max-width: 95%;
   }
 `;
 const UserCard = styled.div`
@@ -178,7 +189,7 @@ const Label = styled.label`
   font-size: 1.1rem;
 `;
 const Input = styled.input`
-  width: auto;
+  width: 100%;
   height: 30px;
   border: none;
   border-top: 1px solid #283b89;

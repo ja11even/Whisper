@@ -9,7 +9,7 @@ export const Heading = styled.h1`
       color: white;
       @media (max-width: 700px) {
         text-align: center;
-        width: 340px;
+        width: 330px;
       }
     `}
   ${(props) =>

@@ -132,8 +132,13 @@ function WhisperDetailPage() {
 }
 
 const WhisperDetailContainer = styled.div`
-  min-height: 100vh;
-  padding: 2rem 0;
+  min-height: 100svh;
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-top: max(2rem, constant(safe-area-inset-top));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  padding-bottom: max(2rem, constant(safe-area-inset-bottom));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   background-color: #58d8db;
 `;
 
@@ -141,8 +146,11 @@ const WhisperWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
   margin-top: 70px;
+  @media (max-width: 1400px) {
+    max-width: 90%;
+  }
   @media (max-width: 700px) {
-    max-width: 370px;
+    max-width: 95%;
   }
 `;
 

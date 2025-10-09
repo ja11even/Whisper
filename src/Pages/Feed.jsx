@@ -145,15 +145,23 @@ const PostForm = styled.form``;
 
 const FeedContainer = styled.div`
   background-color: #58d8db;
-  min-height: 100vh;
-  padding: 2rem 0;
+  min-height: 100svh;
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-top: max(2rem, constant(safe-area-inset-top));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  padding-bottom: max(2rem, constant(safe-area-inset-bottom));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 `;
 const FeedWrapper = styled.div`
   max-width: 1000px;
   margin: auto;
   margin-top: 70px;
+  @media (max-width: 1400px) {
+    max-width: 90%;
+  }
   @media (max-width: 700px) {
-    max-width: 370px;
+    max-width: 95%;
   }
 `;
 
@@ -175,6 +183,10 @@ const WhisperButtonDiv = styled.div`
   bottom: 10px;
   right: 71px;
   z-index: 1000;
+  @media (max-width: 1400px) {
+    bottom: 20px;
+    right: 20px;
+  }
   @media (max-width: 700px) {
     bottom: 20px;
     right: 10px;
@@ -247,9 +259,11 @@ const Buttons = styled.div`
 const Filler = styled.div``;
 
 const IllustrationImage = styled.img`
-  width: 1000px;
-  height: 490px;
+  max-width: 655px;
+  height: auto;
   margin-bottom: 20px;
+  object-fit: contain;
+  width: 90%;
   @media (max-width: 700px) {
     width: 100%;
     height: 100%;
