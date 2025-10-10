@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Pages/Home";
 import { GlobalStyles } from "./Styles/GlobalStyles";
 import Feed from "./Pages/Feed";
@@ -16,7 +16,6 @@ import ResetPassword from "./Pages/ResetPassword";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { persistQueryClient } from "@tanstack/react-query-persist-client";
 import { useEffect } from "react";
-import { supabase } from "./Service/Supabase";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,20 +38,7 @@ persistQueryClient({
 
 function App() {
   const location = useLocation();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event) => {
-        if (event === "PASSWORD_RECOVERY") {
-          navigate("/reset-password");
-        }
-      }
-    );
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, [navigate]);
   useEffect(() => {
     document.body.className = "";
     if (location.pathname === "/" || location.pathname === "/reset-password") {

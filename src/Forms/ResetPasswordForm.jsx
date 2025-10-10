@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { supabase } from "../Service/Supabase";
 import toast from "react-hot-toast";
@@ -15,16 +15,6 @@ function ResetPasswordForm() {
   const navigate = useNavigate();
   const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/;
 
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.includes("access_token")) {
-      supabase.auth.setSessionFromUrl({ hash }).catch(() => {
-        toast.error("Expired reset link");
-        navigate("/");
-      });
-    }
-  }, [navigate]);
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (!password && !confirmPassword) return;
@@ -40,6 +30,13 @@ function ResetPasswordForm() {
       toast.error(
         "Password must be at least 8 characters, include a number and special character"
       );
+      return;
+    }
+    const { data: session } = await supabase.auth.getSession();
+    if (!session) {
+      toast.error("Expired or invalid password reset link");
+      setSubmitting(false);
+      navigate("/");
       return;
     }
     setSubmitting(true);
