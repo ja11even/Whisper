@@ -64,7 +64,7 @@ function SignUpForm() {
                 message: "At least 8 characters",
               },
               pattern: {
-                value: /^(?=.*[!@#$%^&*])(?=.*\d).+$/,
+                value: /^(?=.*[!.@#$%^&*])(?=.*\d).+$/,
                 message: "Must include a number and special character",
               },
             })}
